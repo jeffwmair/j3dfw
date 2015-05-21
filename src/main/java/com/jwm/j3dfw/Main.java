@@ -23,8 +23,12 @@ public class Main {
 		plane.loadRootPart("plane","plane");
 		Geometry cube = new Geometry();
 		cube.loadRootPart("cube","cube");
+		Geometry cube2 = new Geometry();
+		cube2.loadRootPart("cube","cube");
+		cube2.setOverallTranslation(-2,0,0);
 		parts.add(plane);
 		parts.add(cube);
+		parts.add(cube2);
 		MainFrame frame = new MainFrame(parts);	
 	}
 }
