@@ -1,4 +1,4 @@
-package com.jwm.drive;
+package com.jwm.j3dfw;
 
 import java.awt.Frame;
 
