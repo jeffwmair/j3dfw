@@ -1,0 +1,11 @@
+# Blender MTL File: 'cutlass.blend'
+# Material Count: 1
+
+newmtl BlackPlastic
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 0.015059 0.014996 0.014805
+Ks 0.600000 0.600000 0.600000
+Ni 1.000000
+d 1.000000
+illum 2
