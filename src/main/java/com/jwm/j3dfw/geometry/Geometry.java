@@ -207,7 +207,7 @@ public class Geometry {
 		gl2.glMaterialfv(GL.GL_FRONT, GL2.GL_DIFFUSE, material.diffuse);
 		gl2.glMaterialfv(GL.GL_FRONT, GL2.GL_SHININESS, material.shinyness);
 	}
-	protected void loadRootPart(String meshFilePrefix, String materialFilePrefix) {
+	public void loadRootPart(String meshFilePrefix, String materialFilePrefix) {
 		try {
 			mesh = FileLoader.loadMesh(meshFilePrefix + ".obj");
 			material = FileLoader.loadMaterial(materialFilePrefix + ".mtl", true);
