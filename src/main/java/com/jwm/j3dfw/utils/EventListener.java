@@ -20,15 +20,17 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 	private Scene scene1;
 	private Scene scene2;
 	private Scene activeScene;
+	private ControllerFactory controllerFactory;
 	private GLCanvas canvas;
 	private GeometryList geometryItems;
 	private boolean cmdKey, shiftKey;
 	double lastX, lastY;
 
-	public EventListener(Scene scene1, GeometryList items, GLCanvas canvas) {
+	public EventListener(Scene scene1, GeometryList items, ControllerFactory controllerFactory, GLCanvas canvas) {
 		this.geometryItems = items;
 		this.scene1 = scene1;
 		// this.scene2 = scene2;
+		this.controllerFactory = controllerFactory;
 		this.canvas = canvas;
 		activeScene = scene1;
 		// moveCameraTargetWithMouse = false;
@@ -45,18 +47,18 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 		double xPos = x - viewportWidth / 2.0;
 		double xPct = 2 * xPos / viewportWidth;
 		for (Geometry g : geometryItems) {
-			ControllerFactory.getInstance(g).setMousePosition(xPos, xPct);
+			controllerFactory.getInstance(g).setMousePosition(xPos, xPct);
 		}
 	}
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		for (Geometry g : geometryItems) {
 			if (cmdKey) {
-				ControllerFactory.getInstance(g).mouseWheelMoved(e.getWheelRotation());
+				controllerFactory.getInstance(g).mouseWheelMoved(e.getWheelRotation());
 			} else if (shiftKey) {
-				ControllerFactory.getInstance(g).shiftMouseWheelMoved(e.getWheelRotation());
+				controllerFactory.getInstance(g).shiftMouseWheelMoved(e.getWheelRotation());
 			} else {
-				ControllerFactory.getInstance(g).cmdMouseWheelMoved(e.getWheelRotation());
+				controllerFactory.getInstance(g).cmdMouseWheelMoved(e.getWheelRotation());
 			}
 		}
 	}
@@ -75,7 +77,7 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 			break;
 		}
 		for (Geometry g : geometryItems) {
-			ControllerFactory.getInstance(g).keyPress(e.getKeyChar());
+			controllerFactory.getInstance(g).keyPress(e.getKeyChar());
 		}
 	}
 	@Override
@@ -101,7 +103,7 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 	@Override
 	public void mousePressed(MouseEvent e) {
 		for (Geometry g : geometryItems) {
-			Controller c = ControllerFactory.getInstance(g);
+			Controller c = controllerFactory.getInstance(g);
 			switch (e.getButton()) {
 			case 1:
 				c.leftMouseDown();
@@ -115,7 +117,7 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		for (Geometry g : geometryItems) {
-			Controller c = ControllerFactory.getInstance(g);
+			Controller c = controllerFactory.getInstance(g);
 			switch (e.getButton()) {
 			case 1:
 				c.leftMouseUp();

@@ -14,6 +14,7 @@ import com.jwm.j3dfw.production.Camera;
 import com.jwm.j3dfw.production.Scene;
 import com.jwm.j3dfw.utils.EventListener;
 import com.jwm.j3dfw.utils.MainFrame;
+import com.jwm.j3dfw.controller.*;
 
 public class Main {
 	
@@ -29,6 +30,7 @@ public class Main {
 		parts.add(plane);
 		parts.add(cube);
 		parts.add(cube2);
-		MainFrame frame = new MainFrame(parts);	
+		ControllerFactory cf = new ControllerFactoryDefaultImpl();
+		MainFrame frame = new MainFrame(parts, cf);	
 	}
 }

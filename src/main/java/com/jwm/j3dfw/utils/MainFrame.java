@@ -12,11 +12,12 @@ import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.GeometryList;
 import com.jwm.j3dfw.production.Camera;
 import com.jwm.j3dfw.production.Scene;
+import com.jwm.j3dfw.controller.ControllerFactory;
 import com.jwm.j3dfw.utils.EventListener;
 
 public class MainFrame {
 	
-	public MainFrame(GeometryList parts) { 
+	public MainFrame(GeometryList parts, ControllerFactory controllerFactory) { 
 
 		GLProfile glp = GLProfile.getDefault();
 		GLCapabilities caps = new GLCapabilities(glp);
@@ -28,7 +29,7 @@ public class MainFrame {
 		Camera cam = geo.getCamera();
 
 		Scene scene = new Scene(parts, cam);
-		EventListener listener = new EventListener(scene, parts, canvas);
+		EventListener listener = new EventListener(scene, parts, controllerFactory, canvas);
 		canvas.addMouseMotionListener(listener);
 		canvas.addMouseWheelListener(listener);
 		canvas.addMouseListener(listener);
