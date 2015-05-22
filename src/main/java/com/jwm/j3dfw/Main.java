@@ -30,7 +30,10 @@ public class Main {
 		parts.add(plane);
 		parts.add(cube);
 		parts.add(cube2);
+		Geometry geo = parts.firstOrNull(Geometry.class);
+		geo.initCamera();
+		Camera cam = geo.getCamera();
 		ControllerFactory cf = new ControllerFactoryDefaultImpl();
-		MainFrame frame = new MainFrame(parts, cf);	
+		MainFrame frame = new MainFrame(parts, cf, cam);	
 	}
 }

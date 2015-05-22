@@ -17,16 +17,16 @@ import com.jwm.j3dfw.utils.EventListener;
 
 public class MainFrame {
 	
-	public MainFrame(GeometryList parts, ControllerFactory controllerFactory) { 
+	public MainFrame(GeometryList parts, ControllerFactory controllerFactory, Camera cam) { 
 
 		GLProfile glp = GLProfile.getDefault();
 		GLCapabilities caps = new GLCapabilities(glp);
 		caps.setSampleBuffers(true);
 		GLCanvas canvas = new GLCanvas(caps);
 
-		Geometry geo = parts.firstOrNull(Geometry.class);
-		geo.initCamera();
-		Camera cam = geo.getCamera();
+		//Geometry geo = parts.firstOrNull(Geometry.class);
+		//geo.initCamera();
+		//Camera cam = geo.getCamera();
 
 		Scene scene = new Scene(parts, cam);
 		EventListener listener = new EventListener(scene, parts, controllerFactory, canvas);
