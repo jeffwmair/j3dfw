@@ -15,10 +15,16 @@ import com.jwm.j3dfw.production.Scene;
 import com.jwm.j3dfw.controller.ControllerFactory;
 import com.jwm.j3dfw.utils.EventListener;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MainFrame {
+
+	private static Logger log = LogManager.getLogger(MainFrame.class);
 	
 	public MainFrame(GeometryList parts, ControllerFactory controllerFactory, Camera cam) { 
 
+		log.info("New MainFrame");
 		GLProfile glp = GLProfile.getDefault();
 		GLCapabilities caps = new GLCapabilities(glp);
 		caps.setSampleBuffers(true);
