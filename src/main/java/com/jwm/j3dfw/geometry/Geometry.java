@@ -11,7 +11,12 @@ import com.jwm.j3dfw.production.Camera;
 import com.jwm.j3dfw.utils.FileLoader;
 import com.jwm.j3dfw.geometry.Transition.TransitionType;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Geometry {
+
+	private static Logger log = LogManager.getLogger(Geometry.class);
 
 	protected List<Geometry> children;
 	private final int ITEMS_PER_VERTEX = 3;
@@ -214,7 +219,7 @@ public class Geometry {
 			Vertex offset = mesh.getOffsetFromOrigin();
 			setOffsetFromOrigin(offset.x, offset.y, offset.z);
 		} catch (Exception e) {
-			logError("Failed to load part: " + e.toString());
+			log.error("Failed to load part:" + e.toString(), e);
 		}
 	}
 	protected void setOffsetFromOrigin(double x, double y, double z) {
