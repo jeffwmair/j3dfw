@@ -1,0 +1,10 @@
+varying vec4 diffuse, specular;
+
+void main(void)
+{
+	
+//	gl_FragColor = 1.5*gl_Color;// (diffuse + specular);
+
+	gl_FragColor = diffuse + specular;
+ 	gl_FragColor.rgb *= NdotL*1.2;
+}
