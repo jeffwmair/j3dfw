@@ -9,10 +9,10 @@ public class Plane extends Geometry {
 	private static Logger log = LogManager.getLogger(Plane.class);
 	public Plane(String material) {
 		super();
-		loadRootPart("plane", material);
+		loadRootPart("surface_10m_10m", material);
 	}
 	public Plane() {
 		super();
-		loadRootPart("plane", "plane");
+		loadRootPart("surface_10m_10m", "surface_10m_10m");
 	}
 }
