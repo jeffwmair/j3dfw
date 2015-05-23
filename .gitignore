@@ -1,7 +1,0 @@
-target/
-jar/
-*.swp
-# eclipse junk
-.classpath
-.project
-.settings/
