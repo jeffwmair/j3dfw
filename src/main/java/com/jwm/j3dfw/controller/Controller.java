@@ -32,15 +32,24 @@ public class Controller {
 	}
 	public void mouseWheelMoved(int wheelRotation) {
 		Camera cam = geo.getCamera();
+		if (cam == null) {
+			return;
+		}
 		cam.setZoom(wheelRotation);
 	}
 	public void cmdMouseWheelMoved(int wheelMoved) {
 		Camera cam = geo.getCamera();
+		if (cam == null) {
+			return;
+		}
 		double angleChange = wheelMoved;
 		cam.incrementAngle(angleChange);
 	}
 	public void shiftMouseWheelMoved(int wheelMoved) {
 		Camera cam = geo.getCamera();
+		if (cam == null) {
+			return;
+		}
 		double angleChange = wheelMoved;
 		cam.incrementVerticalAngle(angleChange);
 	}
