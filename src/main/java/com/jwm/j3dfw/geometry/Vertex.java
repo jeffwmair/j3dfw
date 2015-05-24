@@ -15,4 +15,9 @@ public class Vertex {
 		double theta_degrees = Math.toDegrees(theta);
 		return theta_degrees;
 	}
+
+	@Override
+	public String toString() {
+		return "Vertex x:"+x+", y:" + y + ", z:" + z;
+	}
 }

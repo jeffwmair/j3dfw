@@ -4,6 +4,9 @@ import java.nio.FloatBuffer;
 
 import com.jogamp.common.nio.Buffers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Geometric verticies for the shape as well as vertex normals for lighting
  * 
@@ -11,6 +14,7 @@ import com.jogamp.common.nio.Buffers;
  * 
  */
 public class Mesh {
+	private static Logger log = LogManager.getLogger(Mesh.class);
 	public FloatBuffer vertex_components;
 	public FloatBuffer vertex_component_normals;
 	private float[] vertex_components_arr;
@@ -24,6 +28,9 @@ public class Mesh {
 		vertexNormalCompSize = vertexComponentNormals.length;
 	}
 	public Vertex getCenter() {
+		if (log.isDebugEnabled()) {
+			log.debug("getCenter");
+		}
 		float centerX = getCenterForComponent(0);
 		float centerY = getCenterForComponent(1);
 		float centerZ = getCenterForComponent(2);

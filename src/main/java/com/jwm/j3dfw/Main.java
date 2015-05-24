@@ -12,8 +12,12 @@ import com.jwm.j3dfw.geometry.Rotation.RotationDirection;
 import com.jwm.j3dfw.production.Camera;
 import com.jwm.j3dfw.utils.MainFrame;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class Main {
 	
+	private static Logger log = LogManager.getLogger(Main.class);
 	public static void main(String[] args) {
 		GeometryList parts = new GeometryList();
 		RotatingPlane plane = new RotatingPlane();
@@ -44,7 +48,6 @@ public class Main {
 		Geometry geo = parts.firstOrNull(Geometry.class);
 		geo.initCamera();
 		Camera cam = geo.getCamera();
-		cam.toggleAutoRotate();
 		ControllerFactory cf = new ControllerFactoryDefaultImpl();
 		MainFrame frame = new MainFrame(parts, cf, cam);	
 	}

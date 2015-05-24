@@ -6,11 +6,19 @@ import javax.media.opengl.glu.GLU;
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.Vertex;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Camera {
+	private static Logger log = LogManager.getLogger(Camera.class);
 	private final double CAM_MAX_VIEW_DISTANCE = 50000.0;
 	protected Geometry targetItem;
 	private double viewportWidth, viewportHeight;
 	protected Vertex camera_position, camera_target;
+
+	/* 
+	 * GLU is the glut utility library which has camera helper functions 
+	 */
 	protected GLU glu;
 	protected double zoom_distance;
 	protected double h_angle;
@@ -19,16 +27,21 @@ public class Camera {
 	protected boolean autoTrack;
 
 	public Camera() {
-		camera_position = new Vertex(0, 0, 0);
-		camera_target = new Vertex(0, 0, 0);
+		camera_position = new Vertex(0, 0, 10);
+		camera_target = new Vertex(-10, 0, 0);
 		zoom_distance = 25;
 		h_angle = 90;
 		v_pct = 0.75;
-		autoRotate = true;
-		autoTrack = true;
+
+		this.autoRotate = false;
+		this.autoTrack = false;
 	}
 	public void setTarget(Geometry item) {
+		if (log.isDebugEnabled()) {
+			log.debug("setTarget:"+item);
+		}
 		targetItem = item;
+		camera_target = targetItem.getCenter();
 	}
 	public Geometry getTarget() {
 		return targetItem;
@@ -72,8 +85,10 @@ public class Camera {
 		if (autoRotate) {
 			camera_position = targetItem.getNearbyPointOnYPlane(yPlaneDistance, h_angle);
 		}
-		glu.gluLookAt(camera_position.x, camera_position.y + verticalDistance, camera_position.z, camera_target.x,
-				camera_target.y, camera_target.z, 0, 1, 0);
+		if (log.isDebugEnabled()) {
+			log.debug("camera_position:" + camera_position + ", camera_target:" + camera_target + ", verticalDistance:"+verticalDistance);
+		}
+		glu.gluLookAt(camera_position.x, camera_position.y + verticalDistance, camera_position.z, camera_target.x, camera_target.y, camera_target.z, 0, 1, 0);
 	}
 	public void setZoom(int wheelRotation) {
 		zoom_distance += wheelRotation;

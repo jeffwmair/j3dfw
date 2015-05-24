@@ -55,7 +55,6 @@ public class Geometry {
 		transformations.add(rotationLeftAndRight);
 		transformations.add(overallScale);
 		offsetFromOrigin = new Vertex(0, 0, 0);
-		initCamera();
 	}
 	public void registerInfoListener(GeometryListener listener) {
 		listeners.add(listener);
@@ -109,7 +108,7 @@ public class Geometry {
 			appropriateTransition.startTransition(startAngle, endAngle, speedOutOf10, transType);
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			log.error("startAngle:"+startAngle+",endAngle:"+endAngle+", dir:"+dir, e);
 		}
 		getRotation(dir).setAngle(startAngle);
 	}
@@ -120,6 +119,9 @@ public class Geometry {
 		overallScale.set(x, y, z);
 	}
 	public void addChild(Geometry child) {
+		if (log.isDebugEnabled()) {
+			log.debug("addChild: adding " + child + " to this: " + this);
+		}
 		children.add(child);
 	}
 	public Camera getCamera() {
@@ -130,8 +132,18 @@ public class Geometry {
 		cam.setTarget(this);
 	}
 	public Vertex getCenter() {
+			if (log.isDebugEnabled()) {
+				log.debug("getCenter");
+			}
+		
 		Mesh m = mesh;
 		if (m == null) {
+			if (log.isDebugEnabled()) {
+				log.debug("m is null, trying to get the first child's mesh");
+			}
+			if (children == null || children.size() == 0) {
+				throw new RuntimeException("Cannot get the center for this ("+this+") because it has no mesh and has no child geometry items.");
+			}
 			m = children.get(0).mesh;
 		}
 		Vertex meshCenter = m.getCenter();
@@ -226,6 +238,11 @@ public class Geometry {
 		offsetFromOrigin = new Vertex(x, y, z);
 	}
 	protected void logError(String msg) {
-		System.err.println(msg);
+		log.error(msg);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + ", offsetFromOrigin:" + offsetFromOrigin;	
 	}
 }
