@@ -15,7 +15,7 @@ public class RotatingPlane extends Plane {
 
 	@Override
 	protected void applyLogic() {
-		currentRotationAmt += 1.0;
+		currentRotationAmt += 0.25;
 		setRotation(currentRotationAmt, RotationDirection.overhead);
 	}
 }

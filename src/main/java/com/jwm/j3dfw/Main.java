@@ -17,10 +17,8 @@ public class Main {
 	public static void main(String[] args) {
 		GeometryList parts = new GeometryList();
 		RotatingPlane plane = new RotatingPlane();
-		/*
-		plane.setScale(1.0, 1.0, 2.0);
-		plane.setOverallTranslation(0.0, 0.0, 10.0);
-		*/
+		plane.setOverallTranslation(100.0, 0.0, 0.0);
+		plane.setScale(4.0);
 		parts.add(plane);
 
 		Random rand = new Random(System.currentTimeMillis());
@@ -38,7 +36,7 @@ public class Main {
 			double randomZ = getRandom(-zRange, zRange, rand);
 			randomZ -= 7.0;
 			double randomScale = getRandom(1.0, 2.5, rand);
-			tower.setOverallTranslation(randomX, -0.9, randomZ);
+			tower.setOverallTranslation(randomX, -0.95, randomZ);
 			tower.setScale(0.25, randomScale, 0.25);
 			plane.addChild(tower);
 			//parts.add(tower);
@@ -46,6 +44,7 @@ public class Main {
 		Geometry geo = parts.firstOrNull(Geometry.class);
 		geo.initCamera();
 		Camera cam = geo.getCamera();
+		cam.toggleAutoRotate();
 		ControllerFactory cf = new ControllerFactoryDefaultImpl();
 		MainFrame frame = new MainFrame(parts, cf, cam);	
 	}
