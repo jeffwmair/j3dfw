@@ -182,7 +182,7 @@ public class FileLoader {
 	private static InputStream getResourceStream(String resourcename) {
 		InputStream is = null;
 		try {
-			is = FileLoader.class.getClassLoader().getResourceAsStream("Graphics/" + resourcename);
+			is = FileLoader.class.getClassLoader().getResourceAsStream("graphics/" + resourcename);
 			if (is == null) { 
 				throw new RuntimeException("Failed to load resource: " + resourcename);
 			}

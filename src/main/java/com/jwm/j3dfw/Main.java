@@ -16,8 +16,8 @@ public class Main {
 		Plane plane = new Plane();
 		Cube cube = new Cube();
 		Cube cube2 = new Cube();
-		cube.setOverallTranslation(0,0,-3);
-		cube2.setOverallTranslation(-2,0,-3);
+		cube.setOverallTranslation(0,-1,0);
+		cube2.setOverallTranslation(-2,0,0);
 		parts.add(plane);
 		parts.add(cube);
 		parts.add(cube2);

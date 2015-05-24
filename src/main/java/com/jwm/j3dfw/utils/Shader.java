@@ -31,11 +31,11 @@ public class Shader {
 		int f = gl.glCreateShader(GL2.GL_FRAGMENT_SHADER);
 
 		ClassLoader cl = Shader.class.getClassLoader();
-		InputStream vertexShaderInStream = FileLoader.class.getClassLoader().getResourceAsStream("Graphics/" + vertexShaderResource);
+		InputStream vertexShaderInStream = FileLoader.class.getClassLoader().getResourceAsStream("graphics/" + vertexShaderResource);
 		if (vertexShaderInStream == null) {
 			throw new RuntimeException("Could not find the vertex shader resource named: " + vertexShaderResource);
 		}
-		InputStream fragmentShaderInStream= FileLoader.class.getClassLoader().getResourceAsStream("Graphics/" + fragmentShaderResource);
+		InputStream fragmentShaderInStream= FileLoader.class.getClassLoader().getResourceAsStream("graphics/" + fragmentShaderResource);
 		if (fragmentShaderInStream == null) {
 			throw new RuntimeException("Could not find the fragment shader resource named: " + fragmentShaderResource);
 		}
