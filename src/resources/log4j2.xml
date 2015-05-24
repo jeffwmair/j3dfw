@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+	<!-- Some properties to alleviate duplication and to illustrate better configuration style -->	
+	<Properties>
+		<Property name="App">j3dfw</Property>
+		<Property name="LogDir">logs</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		<File name="fileAppender" fileName="logs/${App}.log">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+		</File>
+		<!-- Rolling file appender with a cap on the max file size; old 
+		log files are placed in a dated folder and zipped.  Only 10 old logs are kept. -->
+	</Appenders>
+	<Loggers>
+		<!-- Turning on additivity causing the Root logger to be used as well.  Nice to log to the console too for debugging. -->
+		<Logger name="com.jwm" level="debug" additivity="true">
+			<AppenderRef ref="fileAppender" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
