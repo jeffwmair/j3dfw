@@ -1,6 +1,7 @@
 package com.jwm.j3dfw.controller;
 
 import com.jwm.j3dfw.geometry.Geometry;
+import com.jwm.j3dfw.production.Camera;
 
 public class Controller {
 	private Geometry geo;
@@ -30,12 +31,17 @@ public class Controller {
 
 	}
 	public void mouseWheelMoved(int wheelRotation) {
-		geo.getCamera().setZoom(wheelRotation);
+		Camera cam = geo.getCamera();
+		cam.setZoom(wheelRotation);
 	}
-	public void cmdMouseWheelMoved(int wheelRotation) {
-		
+	public void cmdMouseWheelMoved(int wheelMoved) {
+		Camera cam = geo.getCamera();
+		double angleChange = wheelMoved;
+		cam.incrementAngle(angleChange);
 	}
-	public void shiftMouseWheelMoved(int wheeMoved) {
-		
+	public void shiftMouseWheelMoved(int wheelMoved) {
+		Camera cam = geo.getCamera();
+		double angleChange = wheelMoved;
+		cam.incrementVerticalAngle(angleChange);
 	}
 }

@@ -1,5 +1,4 @@
 target/
-jar/
 *.swp
 # eclipse junk
 .classpath
