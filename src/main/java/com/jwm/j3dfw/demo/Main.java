@@ -32,7 +32,7 @@ public class Main {
 		double z = -3.0;
 		double xRange = 3.0;
 		double zRange = 5.0;
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 200; i++) {
 			Cube tower = new Cube();
 			tower.setRotation(180.0, Rotation.RotationDirection.endToEnd);
 			// move the tower placement

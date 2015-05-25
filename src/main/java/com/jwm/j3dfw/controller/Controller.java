@@ -3,7 +3,12 @@ package com.jwm.j3dfw.controller;
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.production.Camera;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class Controller {
+
+	private static Logger log = LogManager.getLogger(Controller.class);
 	private Geometry geo;
 
 	public Controller(Geometry g) {
@@ -22,6 +27,11 @@ public class Controller {
 
 	}
 	public void keyPress(int keyCode) {
+
+		if (log.isDebugEnabled()) {
+			log.debug("keyPress:" + keyCode);
+		}
+
 		// 67 = c
 		if (keyCode == 67) {
 
@@ -31,23 +41,45 @@ public class Controller {
 
 	}
 	public void mouseWheelMoved(int wheelRotation) {
+
+		if (log.isDebugEnabled()) {
+			log.debug("mouseWheelMoved:" + wheelRotation);
+		}
+
 		Camera cam = geo.getCamera();
 		if (cam == null) {
+			if (log.isDebugEnabled()) {
+				log.debug("mouseWheelMoved. Camera is null on geo:"+geo);
+			}
 			return;
 		}
 		cam.setZoom(wheelRotation);
 	}
 	public void cmdMouseWheelMoved(int wheelMoved) {
+
+		if (log.isDebugEnabled()) {
+			log.debug("cmdMouseWheelMoved:" + wheelMoved);
+		}
+
 		Camera cam = geo.getCamera();
 		if (cam == null) {
+			if (log.isDebugEnabled()) {
+				log.debug("mouseWheelMoved. Camera is null on geo:"+geo);
+			}
 			return;
 		}
 		double angleChange = wheelMoved;
 		cam.incrementAngle(angleChange);
 	}
 	public void shiftMouseWheelMoved(int wheelMoved) {
+		if (log.isDebugEnabled()) {
+			log.debug("shiftMouseWheelMoved:" + wheelMoved);
+		}
 		Camera cam = geo.getCamera();
 		if (cam == null) {
+			if (log.isDebugEnabled()) {
+				log.debug("mouseWheelMoved. Camera is null on geo:"+geo);
+			}
 			return;
 		}
 		double angleChange = wheelMoved;

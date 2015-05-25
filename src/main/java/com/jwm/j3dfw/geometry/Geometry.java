@@ -16,6 +16,10 @@ import com.jwm.j3dfw.util.FileLoader;
 
 public class Geometry {
 
+	/**
+	 * TODO: simplify this class; it is too big
+	 */
+
 	private static Logger log = LogManager.getLogger(Geometry.class);
 
 	protected List<Geometry> children;
@@ -32,6 +36,9 @@ public class Geometry {
 	protected List<GeometryListener> listeners;
 
 	public Geometry() {
+		if (log.isDebugEnabled()) {
+			log.debug("new Geometry:" + this);
+		}
 		listeners = new ArrayList<GeometryListener>();
 		children = new ArrayList<Geometry>();
 		transformations = new ArrayList<Transformation>();
@@ -57,6 +64,10 @@ public class Geometry {
 		offsetFromOrigin = new Vertex(0, 0, 0);
 	}
 	public void registerInfoListener(GeometryListener listener) {
+		if (log.isDebugEnabled()) {
+			log.debug("registerInfoListener:" + listener);
+		}
+
 		listeners.add(listener);
 	}
 	protected void writeInfoToListeners(List<String> info) {
@@ -75,26 +86,26 @@ public class Geometry {
 	}
 	private Transition getRotationTransition(Rotation.RotationDirection dir) {
 		switch (dir) {
-		case endToEnd:
-			return rotationEndOverEndTransition;
-		case leftAndRight:
-			return rotationLeftAndRightTransition;
-		case overhead:
-			return rotationOverheadTransition;
-		default:
-			return rotationEndOverEndTransition;
+			case endToEnd:
+				return rotationEndOverEndTransition;
+			case leftAndRight:
+				return rotationLeftAndRightTransition;
+			case overhead:
+				return rotationOverheadTransition;
+			default:
+				return rotationEndOverEndTransition;
 		}
 	}
 	public Rotation getRotation(Rotation.RotationDirection dir) {
 		switch (dir) {
-		case endToEnd:
-			return rotationEndOverEnd;
-		case leftAndRight:
-			return rotationLeftAndRight;
-		case overhead:
-			return rotationOverhead;
-		default:
-			return rotationEndOverEnd;
+			case endToEnd:
+				return rotationEndOverEnd;
+			case leftAndRight:
+				return rotationLeftAndRight;
+			case overhead:
+				return rotationOverhead;
+			default:
+				return rotationEndOverEnd;
 		}
 	}
 	public Rotation getPostTranslateRotation() {
@@ -128,14 +139,17 @@ public class Geometry {
 		return cam;
 	}
 	public void initCamera() {
+		if (log.isDebugEnabled()) {
+			log.debug("initCamera()");
+		}
 		cam = new Camera();
 		cam.setTarget(this);
 	}
 	public Vertex getCenter() {
-			if (log.isDebugEnabled()) {
-				log.debug("getCenter");
-			}
-		
+		if (log.isDebugEnabled()) {
+			log.debug("getCenter");
+		}
+
 		Mesh m = mesh;
 		if (m == null) {
 			if (log.isDebugEnabled()) {
