@@ -1,4 +1,4 @@
-package com.jwm.j3dfw;
+package com.jwm.j3dfw.demo;
 
 import java.util.Random;
 
@@ -11,6 +11,8 @@ import com.jwm.j3dfw.geometry.Rotation;
 import com.jwm.j3dfw.geometry.Rotation.RotationDirection;
 import com.jwm.j3dfw.production.Camera;
 import com.jwm.j3dfw.utils.MainFrame;
+
+import com.jwm.j3dfw.demo.geometry.*;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;

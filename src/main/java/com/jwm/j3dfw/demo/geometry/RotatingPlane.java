@@ -1,8 +1,9 @@
-package com.jwm.j3dfw.geometry.shapes;
+package com.jwm.j3dfw.demo.geometry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.jwm.j3dfw.geometry.shapes.Plane;
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.Rotation;
 import com.jwm.j3dfw.geometry.Rotation.RotationDirection;
@@ -12,6 +13,7 @@ public class RotatingPlane extends Plane {
 	private double currentRotationAmt;
 	public RotatingPlane() {
 		super();
+
 		/* TODO: sort out this magic number.  It is
 		 * used to make the axis of rotation of the
 		 * plane be its centre.
@@ -21,14 +23,9 @@ public class RotatingPlane extends Plane {
 
 	@Override
 	protected void applyLogic() {
-		currentRotationAmt += 0.25;
 
-		/*
-		Rotation r = getPostTranslateRotation();
-		// 0 1 0 should be a "straight up" vector for overhead rotation
-		r.setValues(currentRotationAmt, 0, 1, 0);
-		*/
-
+		// just rotate around in a circle
+		currentRotationAmt += 0.1;
 		setRotation(currentRotationAmt, RotationDirection.overhead);
 	}
 }
