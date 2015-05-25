@@ -55,7 +55,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>
 				<configuration>
-					<mainClass>com.jwm.j3dfw.demo.Main</mainClass>
+					<mainClass>com.jwm.j3dfw.demo.DemoBuildings</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>
