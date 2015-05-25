@@ -9,6 +9,9 @@ import javax.media.opengl.fixedfunc.GLLightingFunc;
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.Vertex;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class Lights {
 	private static Logger log = LogManager.getLogger(Lights.class);
 	private static float spotlightAngle;
@@ -76,7 +79,9 @@ public class Lights {
 
 	public static void setupLighting(GL2 gl) {
 		// Global settings.
-		log.info("setupLighting");
+		if (log.isDebugEnabled()) {
+			log.debug("setupLighting");
+		}
 		gl.glEnable(GL2.GL_MULTISAMPLE);
 		gl.glEnable(GL2.GL_DEPTH_TEST);
 		gl.glShadeModel(GLLightingFunc.GL_SMOOTH);

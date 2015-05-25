@@ -41,9 +41,7 @@ public class Scene implements GLEventListener {
 	}
 	@Override
 	public void init(GLAutoDrawable drawable) {
-		if (log.isDebugEnabled()) {
-			log.debut("init");
-		}
+		log.debug("init");
 		GL2 gl = drawable.getGL().getGL2();
 		float backColor = 1.0f;
 		gl.glClearColor(backColor, backColor, backColor, backColor);
