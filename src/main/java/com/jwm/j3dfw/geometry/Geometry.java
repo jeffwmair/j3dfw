@@ -237,9 +237,6 @@ public class Geometry {
 	protected void setOffsetFromOrigin(double x, double y, double z) {
 		offsetFromOrigin = new Vertex(x, y, z);
 	}
-	protected void logError(String msg) {
-		log.error(msg);
-	}
 
 	@Override
 	public String toString() {
