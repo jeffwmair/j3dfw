@@ -6,7 +6,11 @@ import javax.media.opengl.GL2;
 import javax.media.opengl.GL2ES1;
 import javax.media.opengl.fixedfunc.GLLightingFunc;
 
+import com.jwm.j3dfw.geometry.Geometry;
+import com.jwm.j3dfw.geometry.Vertex;
+
 public class Lights {
+	private static Logger log = LogManager.getLogger(Lights.class);
 	private static float spotlightAngle;
 	private static FloatBuffer model_ambient_buff;
 	private static FloatBuffer light_diffuse0_buff;
@@ -72,6 +76,7 @@ public class Lights {
 
 	public static void setupLighting(GL2 gl) {
 		// Global settings.
+		log.info("setupLighting");
 		gl.glEnable(GL2.GL_MULTISAMPLE);
 		gl.glEnable(GL2.GL_DEPTH_TEST);
 		gl.glShadeModel(GLLightingFunc.GL_SMOOTH);

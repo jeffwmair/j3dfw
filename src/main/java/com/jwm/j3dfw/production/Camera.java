@@ -91,6 +91,9 @@ public class Camera {
 		glu.gluLookAt(camera_position.x, camera_position.y + verticalDistance, camera_position.z, camera_target.x, camera_target.y, camera_target.z, 0, 1, 0);
 	}
 	public void setZoom(int wheelRotation) {
+		if (log.isDebugEnabled()) {
+			log.debug("setZoom:"+wheelRotation);
+		}
 		zoom_distance += wheelRotation;
 	}
 	public void toggleAutoRotate() {

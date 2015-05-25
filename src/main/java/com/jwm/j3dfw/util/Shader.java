@@ -6,9 +6,16 @@ import java.io.InputStreamReader;
 
 import javax.media.opengl.GL2;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Shader {
 
+	private static Logger log = LogManager.getLogger(Shader.class);
 	private static String readFromFile(InputStream inStream) {
+		if (log.isDebugEnabled()) {
+			log.debug("readFromFile...");
+		}
 		StringBuilder sb = new StringBuilder();
 		BufferedReader br = null;
 		try {
@@ -22,11 +29,14 @@ public class Shader {
 			return sb.toString();
 
 		} catch (Exception ex) {
+			log.error("Failed to read shader content from inputstream", ex);
 			return null;
 		}
 	}
 
 	public static void initShaders(GL2 gl, String vertexShaderResource, String fragmentShaderResource) {
+		log.info("initShaders");
+
 		int v = gl.glCreateShader(GL2.GL_VERTEX_SHADER);
 		int f = gl.glCreateShader(GL2.GL_FRAGMENT_SHADER);
 

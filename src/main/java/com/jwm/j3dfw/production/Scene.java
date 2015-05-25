@@ -10,7 +10,11 @@ import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.GeometryList;
 import com.jwm.j3dfw.util.Shader;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Scene implements GLEventListener {
+	private static Logger log = LogManager.getLogger(Scene.class);
 	public Camera camera;
 	private GLU glu;
 	private GeometryList sceneProps;
@@ -18,6 +22,7 @@ public class Scene implements GLEventListener {
 	protected double mouseXPositionRelativeToCenter;
 
 	public Scene(GeometryList sceneItems, Camera camera) {
+		log.info("New scene with camera:"+camera+", and sceneItems:" + sceneItems);
 		sceneProps = sceneItems;
 		glu = new GLU();
 		this.camera = camera;
@@ -36,6 +41,9 @@ public class Scene implements GLEventListener {
 	}
 	@Override
 	public void init(GLAutoDrawable drawable) {
+		if (log.isDebugEnabled()) {
+			log.debut("init");
+		}
 		GL2 gl = drawable.getGL().getGL2();
 		float backColor = 1.0f;
 		gl.glClearColor(backColor, backColor, backColor, backColor);
