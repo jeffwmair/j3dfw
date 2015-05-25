@@ -160,7 +160,7 @@ public class Geometry {
 		nearby.z += z;
 		return nearby;
 	}
-	public Rotation addRotation(float angle, Rotation.RotationDirection dir) {
+	public Rotation addRotation(double angle, Rotation.RotationDirection dir) {
 		Rotation r = new Rotation(angle, dir);
 		transformations.add(r);
 		return r;
