@@ -1,4 +1,4 @@
-package com.jwm.j3dfw.utils;
+package com.jwm.j3dfw.util;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

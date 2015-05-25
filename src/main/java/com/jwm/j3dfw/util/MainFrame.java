@@ -1,4 +1,4 @@
-package com.jwm.j3dfw.utils;
+package com.jwm.j3dfw.util;
 
 import java.awt.Frame;
 

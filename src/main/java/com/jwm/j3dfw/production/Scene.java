@@ -8,7 +8,7 @@ import javax.media.opengl.glu.GLU;
 
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.GeometryList;
-import com.jwm.j3dfw.utils.Shader;
+import com.jwm.j3dfw.util.Shader;
 
 public class Scene implements GLEventListener {
 	public Camera camera;

@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.jwm.j3dfw.geometry.Transition.TransitionType;
 import com.jwm.j3dfw.production.Camera;
-import com.jwm.j3dfw.utils.FileLoader;
+import com.jwm.j3dfw.util.FileLoader;
 
 public class Geometry {
 

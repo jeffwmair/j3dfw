@@ -10,7 +10,7 @@ import com.jwm.j3dfw.geometry.shapes.*;
 import com.jwm.j3dfw.geometry.Rotation;
 import com.jwm.j3dfw.geometry.Rotation.RotationDirection;
 import com.jwm.j3dfw.production.Camera;
-import com.jwm.j3dfw.utils.MainFrame;
+import com.jwm.j3dfw.util.MainFrame;
 
 import com.jwm.j3dfw.demo.geometry.*;
 
