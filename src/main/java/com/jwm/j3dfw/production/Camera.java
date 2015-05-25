@@ -3,11 +3,11 @@ package com.jwm.j3dfw.production;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 
-import com.jwm.j3dfw.geometry.Geometry;
-import com.jwm.j3dfw.geometry.Vertex;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.jwm.j3dfw.geometry.Geometry;
+import com.jwm.j3dfw.geometry.Vertex;
 
 public class Camera {
 	private static Logger log = LogManager.getLogger(Camera.class);

@@ -2,10 +2,10 @@ package com.jwm.j3dfw.geometry;
 
 import java.nio.FloatBuffer;
 
-import com.jogamp.common.nio.Buffers;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.jogamp.common.nio.Buffers;
 
 /**
  * Geometric verticies for the shape as well as vertex normals for lighting
