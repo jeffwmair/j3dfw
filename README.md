@@ -4,13 +4,16 @@ Simple JOGL-based framework for 3d applications
 To configure your application to use this project, you need the following maven (pom.xml) configuration:
 
 ### The j3dfw artifact:
+```xml
 <dependency>
 	<groupId>com.jwm.j3dfw</groupId>
 	<artifactId>j3dfw</artifactId>
 	<version>1.0</version>
 </dependency>
+```
 
 ### My public repository:
+```xml
 <repositories>
 	<repository>
 		<id>j3dfw-mvn-repo</id>
@@ -21,3 +24,4 @@ To configure your application to use this project, you need the following maven 
 		</snapshots>
 	</repository>
 </repositories> 
+```
