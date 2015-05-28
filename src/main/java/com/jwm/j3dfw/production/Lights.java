@@ -77,7 +77,7 @@ public class Lights {
 	public static void setupLighting(GL2 gl) {
 		// Global settings.
 		if (log.isDebugEnabled()) {
-			log.debug("setupLighting");
+			log.debug("setupLighting [spotlight:"+useSpotlight+"]");
 		}
 		gl.glEnable(GL2.GL_MULTISAMPLE);
 		gl.glEnable(GL2.GL_DEPTH_TEST);
