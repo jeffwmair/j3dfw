@@ -2,7 +2,7 @@
 Simple JOGL-based framework for 3d applications
 
 Example usages:
-* [Drive](/Drive)
+* [Drive](https://github.com/jeffwmair/Drive)
 * More to come!
 
 ## Maven Instructions
