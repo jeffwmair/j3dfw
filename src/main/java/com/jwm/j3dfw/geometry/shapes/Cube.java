@@ -9,10 +9,10 @@ public class Cube extends Geometry {
 	private static Logger log = LogManager.getLogger(Cube.class);
 	public Cube(String material) {
 		super();
-		loadRootPart("cube", material);
+		loadRootPart("cube-rough", material);
 	}
 	public Cube() {
 		super();
-		loadRootPart("cube", "cube");
+		loadRootPart("cube-rough", "cube");
 	}
 }

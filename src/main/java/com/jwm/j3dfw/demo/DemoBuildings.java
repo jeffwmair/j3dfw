@@ -13,6 +13,7 @@ import com.jwm.j3dfw.geometry.GeometryList;
 import com.jwm.j3dfw.geometry.Rotation;
 import com.jwm.j3dfw.geometry.shapes.Cube;
 import com.jwm.j3dfw.production.Camera;
+import com.jwm.j3dfw.production.TargetCamera;
 import com.jwm.j3dfw.util.MainFrame;
 
 public class DemoBuildings {
@@ -30,7 +31,7 @@ public class DemoBuildings {
 		double z = -3.0;
 		double xRange = 3.0;
 		double zRange = 5.0;
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 50; i++) {
 			Cube tower = new Cube();
 			tower.setRotation(180.0, Rotation.RotationDirection.endToEnd);
 			// move the tower placement
@@ -44,7 +45,8 @@ public class DemoBuildings {
 		}
 		Geometry geo = parts.firstOrNull(Geometry.class);
 		geo.initCamera();
-		Camera cam = geo.getCamera();
+		TargetCamera cam = geo.getCamera();
+		cam.toggleAutoTrack();
 		ControllerFactory cf = new ControllerFactoryDefaultImpl();
 		MainFrame frame = new MainFrame(parts, cf, cam);	
 	}

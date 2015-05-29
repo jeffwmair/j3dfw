@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.jwm.j3dfw.geometry.Transition.TransitionType;
+import com.jwm.j3dfw.production.TargetCamera;
 import com.jwm.j3dfw.production.Camera;
 import com.jwm.j3dfw.util.FileLoader;
 
@@ -32,7 +33,7 @@ public class Geometry {
 	private Transition rotationOverheadTransition, rotationLeftAndRightTransition, rotationEndOverEndTransition;
 	private Translation overallTranslation;
 	private Scaling overallScale;
-	protected Camera cam;
+	protected TargetCamera cam;
 	protected List<GeometryListener> listeners;
 
 	public Geometry() {
@@ -135,14 +136,14 @@ public class Geometry {
 		}
 		children.add(child);
 	}
-	public Camera getCamera() {
+	public TargetCamera getCamera() {
 		return cam;
 	}
 	public void initCamera() {
 		if (log.isDebugEnabled()) {
 			log.debug("initCamera()");
 		}
-		cam = new Camera();
+		cam = new TargetCamera();
 		cam.setTarget(this);
 	}
 	public Vertex getCenter() {
