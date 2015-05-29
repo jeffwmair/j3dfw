@@ -20,7 +20,7 @@ public class TargetCamera extends Camera {
 		this.autoRotate = true;
 		this.autoTrack = true;
 	}
-	protected void look() {
+	protected void look(GLU glu) {
 		double yPlaneDistance_pct = v_pct;
 		double yPlaneDistance = zoom_distance * yPlaneDistance_pct;
 		double verticalDistance = zoom_distance * (1 - yPlaneDistance_pct);

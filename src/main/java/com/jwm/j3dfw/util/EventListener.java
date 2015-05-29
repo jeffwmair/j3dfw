@@ -17,8 +17,7 @@ import com.jwm.j3dfw.geometry.GeometryList;
 import com.jwm.j3dfw.production.Scene;
 
 public class EventListener implements MouseMotionListener, MouseWheelListener, MouseListener, KeyListener {
-	private Scene scene1;
-	private Scene scene2;
+
 	private Scene activeScene;
 	private ControllerFactory controllerFactory;
 	private GLCanvas canvas;
@@ -26,19 +25,18 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 	private boolean cmdKey, shiftKey;
 	double lastX, lastY;
 
-	public EventListener(Scene scene1, GeometryList items, ControllerFactory controllerFactory, GLCanvas canvas) {
+	public EventListener(Scene scene, GeometryList items, ControllerFactory controllerFactory, GLCanvas canvas) {
 		this.geometryItems = items;
-		this.scene1 = scene1;
-		// this.scene2 = scene2;
 		this.controllerFactory = controllerFactory;
 		this.canvas = canvas;
-		activeScene = scene1;
-		// moveCameraTargetWithMouse = false;
+		activeScene = scene;
 	}
+
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		mouseMoved(e);
 	}
+
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// activeScene.setMouseX(e.getX());
@@ -50,6 +48,7 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 			controllerFactory.getInstance(g).setMousePosition(xPos, xPct);
 		}
 	}
+
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		for (Geometry g : geometryItems) {
@@ -62,9 +61,11 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 			}
 		}
 	}
+
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -80,6 +81,7 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 			controllerFactory.getInstance(g).keyPress(e.getKeyChar());
 		}
 	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {

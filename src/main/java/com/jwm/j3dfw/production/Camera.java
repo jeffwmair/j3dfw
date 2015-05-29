@@ -18,27 +18,22 @@ public abstract class Camera {
 	/* 
 	 * GLU is the glut utility library which has camera helper functions 
 	 */
-	protected GLU glu;
 	protected double zoom_distance;
 	protected double h_angle;
 	protected double v_pct;
-	protected boolean autoRotate;
-	protected boolean autoTrack;
+	private GLU glu;
 
 	/**
 	 * Template method for specific camear implementations to implement
 	 */
-	protected abstract void look();
+	protected abstract void look(GLU glu);
 
 	public Camera() {
 		camera_position = new Vertex(0, 0, 10);
-		camera_target = new Vertex(-10, 0, 0);
+		camera_target = new Vertex(0, 0, 0);
 		zoom_distance = 25;
 		h_angle = 90;
 		v_pct = 0.75;
-
-		this.autoRotate = false;
-		this.autoTrack = false;
 	}
 	public void setGlu(GLU glu) {
 		this.glu = glu;
@@ -65,7 +60,7 @@ public abstract class Camera {
 		// Perspective.
 		float widthHeightRatio = (float) viewportWidth / (float) viewportHeight;
 		glu.gluPerspective(25, widthHeightRatio, 1, CAM_MAX_VIEW_DISTANCE);
-		look();
+		look(glu);
 		// Change back to model view matrix.
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 		gl.glLoadIdentity();
