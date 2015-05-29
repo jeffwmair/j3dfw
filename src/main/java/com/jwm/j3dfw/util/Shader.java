@@ -12,28 +12,10 @@ import org.apache.logging.log4j.Logger;
 public class Shader {
 
 	private static Logger log = LogManager.getLogger(Shader.class);
-	private static String readFromFile(InputStream inStream) {
-		if (log.isDebugEnabled()) {
-			log.debug("readFromFile...");
-		}
-		StringBuilder sb = new StringBuilder();
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new InputStreamReader(inStream));
-			String line = br.readLine();
-			while (line != null) {
-				sb.append(line + "\n");
-				line = br.readLine();
-			}
-			br.close();
-			return sb.toString();
 
-		} catch (Exception ex) {
-			log.error("Failed to read shader content from inputstream", ex);
-			return null;
-		}
-	}
-
+	/**
+	 * Setup vertex and fragment shaders
+	 */
 	public static void initShaders(GL2 gl, String vertexShaderResource, String fragmentShaderResource) {
 		log.info("initShaders");
 
@@ -67,6 +49,28 @@ public class Shader {
 		gl.glUseProgram(shaderprogram);
 
 		// timeUniform = gl.glGetUniformLocation(shaderprogram, "time");
-
 	}
+
+	private static String readFromFile(InputStream inStream) {
+		if (log.isDebugEnabled()) {
+			log.debug("readFromFile...");
+		}
+		StringBuilder sb = new StringBuilder();
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(inStream));
+			String line = br.readLine();
+			while (line != null) {
+				sb.append(line + "\n");
+				line = br.readLine();
+			}
+			br.close();
+			return sb.toString();
+
+		} catch (Exception ex) {
+			log.error("Failed to read shader content from inputstream", ex);
+			return null;
+		}
+	}
+
 }

@@ -25,6 +25,9 @@ public abstract class Camera {
 	protected boolean autoRotate;
 	protected boolean autoTrack;
 
+	/**
+	 * Template method for specific camear implementations to implement
+	 */
 	protected abstract void look();
 
 	public Camera() {
@@ -40,14 +43,22 @@ public abstract class Camera {
 	public void setGlu(GLU glu) {
 		this.glu = glu;
 	}
+
+	/**
+	 * Used during window resize
+	 */
 	public void updateViewportDimensions(double w, double h) {
 		viewportWidth = w;
 		viewportHeight = h;
 	}
+
+	/**
+	 * Gets the current camera position
+	 */
 	public Vertex getPosition() {
 		return camera_position;
 	}
-	public void Update(GL2 gl, GLU glu) {
+	public void update(GL2 gl, GLU glu) {
 		// Change to projection matrix.
 		gl.glMatrixMode(GL2.GL_PROJECTION);
 		gl.glLoadIdentity();
