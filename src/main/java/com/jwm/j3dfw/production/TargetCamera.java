@@ -3,17 +3,17 @@ package com.jwm.j3dfw.production;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.Vertex;
 
 public class TargetCamera extends Camera {
 	private static Logger log = LogManager.getLogger(TargetCamera.class);
-	protected Geometry targetItem;
-	protected boolean autoRotate;
-	protected boolean autoTrack;
+	private boolean autoRotate;
+	private boolean autoTrack;
+	private Geometry targetItem;
 
 	public TargetCamera() {
 		super();
@@ -35,6 +35,12 @@ public class TargetCamera extends Camera {
 		}
 		glu.gluLookAt(camera_position.x, camera_position.y + verticalDistance, camera_position.z, camera_target.x, camera_target.y, camera_target.z, 0, 1, 0);
 	}
+	public void setTargetGeometry(Geometry target) {
+		this.targetItem = target;
+	}
+	public Geometry getTargetGeometry() {
+		return this.targetItem;
+	}
 	public void toggleAutoRotate() {
 		if (!autoTrack) {
 			autoRotate = false;
@@ -47,16 +53,6 @@ public class TargetCamera extends Camera {
 		// gotta turn off rotation if we turn off tracking, or it gets messed up
 		if (!autoTrack)
 			autoRotate = false;
-	}
-	public void setTarget(Geometry item) {
-		if (log.isDebugEnabled()) {
-			log.debug("setTarget:"+item);
-		}
-		targetItem = item;
-		camera_target = targetItem.getCenter();
-	}
-	public Geometry getTarget() {
-		return targetItem;
 	}
 
 }

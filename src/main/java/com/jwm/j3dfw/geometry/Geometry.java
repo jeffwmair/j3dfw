@@ -7,8 +7,8 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.jwm.j3dfw.geometry.Transition.TransitionType;
 import com.jwm.j3dfw.production.TargetCamera;
@@ -144,7 +144,7 @@ public class Geometry {
 			log.debug("initCamera()");
 		}
 		cam = new TargetCamera();
-		cam.setTarget(this);
+		cam.setTargetGeometry(this);
 	}
 	public Vertex getCenter() {
 		if (log.isDebugEnabled()) {

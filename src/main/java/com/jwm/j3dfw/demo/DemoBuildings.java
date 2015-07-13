@@ -2,17 +2,19 @@ package com.jwm.j3dfw.demo;
 
 import java.util.Random;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.jwm.j3dfw.controller.ControllerFactory;
 import com.jwm.j3dfw.controller.ControllerFactoryDefaultImpl;
 import com.jwm.j3dfw.demo.geometry.RotatingPlane;
 import com.jwm.j3dfw.geometry.Geometry;
+import com.jwm.j3dfw.geometry.Vertex;
 import com.jwm.j3dfw.geometry.GeometryList;
 import com.jwm.j3dfw.geometry.Rotation;
 import com.jwm.j3dfw.geometry.shapes.Cube;
 import com.jwm.j3dfw.production.Camera;
+import com.jwm.j3dfw.production.DefaultCamera;
 import com.jwm.j3dfw.production.TargetCamera;
 import com.jwm.j3dfw.util.MainFrame;
 
@@ -43,10 +45,18 @@ public class DemoBuildings {
 			tower.setScale(0.25, randomHeight, 0.25);
 			plane.addChild(tower);
 		}
+		/*
 		Geometry geo = parts.firstOrNull(Geometry.class);
 		geo.initCamera();
 		TargetCamera cam = geo.getCamera();
 		cam.toggleAutoTrack();
+		*/
+		DefaultCamera cam = new DefaultCamera();
+		Vertex camPos = cam.getPosition();
+		Vertex camTarget = cam.getTarget();
+		camTarget.y += 20;
+		camPos.y = 20;
+
 		ControllerFactory cf = new ControllerFactoryDefaultImpl();
 		MainFrame frame = new MainFrame(parts, cf, cam);	
 	}

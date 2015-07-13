@@ -6,8 +6,8 @@ import javax.media.opengl.GL2;
 import javax.media.opengl.GL2ES1;
 import javax.media.opengl.fixedfunc.GLLightingFunc;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class Lights {
 	private static Logger log = LogManager.getLogger(Lights.class);

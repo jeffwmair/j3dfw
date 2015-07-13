@@ -3,8 +3,8 @@ package com.jwm.j3dfw.production;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.Vertex;
@@ -53,6 +53,10 @@ public abstract class Camera {
 	public Vertex getPosition() {
 		return camera_position;
 	}
+
+	/**
+	 * Update method that should be called in the main GL event loop
+	 */
 	public void update(GL2 gl, GLU glu) {
 		// Change to projection matrix.
 		gl.glMatrixMode(GL2.GL_PROJECTION);
@@ -65,9 +69,21 @@ public abstract class Camera {
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 		gl.glLoadIdentity();
 	}
+
+	public void setTarget(Vertex target) {
+		if (log.isDebugEnabled()) {
+			log.debug("setTarget:"+target);
+		}
+		camera_target = target;
+	}
+	public Vertex getTarget() {
+		return camera_target;
+	}
+
 	public void incrementAngle(double amount) {
 		this.h_angle += amount;
 	}
+
 	public void incrementVerticalAngle(double amount) {
 		double pct = amount / 100.0;
 		this.v_pct += pct;

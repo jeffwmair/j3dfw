@@ -6,8 +6,8 @@ import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLProfile;
 import javax.media.opengl.awt.GLCanvas;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.jogamp.opengl.util.FPSAnimator;
 import com.jwm.j3dfw.controller.ControllerFactory;
@@ -26,10 +26,6 @@ public class MainFrame {
 		GLCapabilities caps = new GLCapabilities(glp);
 		caps.setSampleBuffers(true);
 		GLCanvas canvas = new GLCanvas(caps);
-
-		//Geometry geo = parts.firstOrNull(Geometry.class);
-		//geo.initCamera();
-		//Camera cam = geo.getCamera();
 
 		Scene scene = new Scene(parts, cam);
 		EventListener listener = new EventListener(scene, parts, controllerFactory, canvas);
