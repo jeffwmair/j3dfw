@@ -6,7 +6,8 @@ Example usages:
 * More to come!
 
 ## Maven Dependency
-To use this dependency, you must first install it in your local Maven repo.  Run:
+### Installation
+First you must install the artifact in your local Maven repo. 
 
 ```shell
 git clone https://github.com/jeffwmair/j3dfw.git
@@ -15,6 +16,8 @@ mvn install
 ```
 
 ### Dependency
+
+The add the dependency to your application's pom.xml.
 
 ```xml
 <dependency>
