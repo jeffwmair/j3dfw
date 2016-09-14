@@ -26,7 +26,6 @@ public class DemoGeometryFactoryImpl implements GeometryFactory {
 
         // y -> vertical height
         // z -> distance from the camera;
-        double z = -3.0;
         double xRange = 3.0;
         double zRange = 5.0;
         for (int i = 0; i < 50; i++) {
@@ -35,7 +34,7 @@ public class DemoGeometryFactoryImpl implements GeometryFactory {
             // move the tower placement
             double randomX = getRandom(-xRange, xRange, rand);
             double randomZ = getRandom(-zRange, zRange, rand);
-            randomZ -= 7.0;
+            randomZ -= 30.0;
             double randomHeight = getRandom(1.0, 4.5, rand);
             tower.setOverallTranslation(randomX, -0.95, randomZ);
             tower.setScale(0.25, randomHeight, 0.25);
@@ -61,7 +60,6 @@ public class DemoGeometryFactoryImpl implements GeometryFactory {
 
     private static double scaleVal(double min, double max, double val) {
 		double newRange = max-min;
-		double oldRange = 1.0; // java nextDouble...
 		return newRange * val + min;
 	}
 

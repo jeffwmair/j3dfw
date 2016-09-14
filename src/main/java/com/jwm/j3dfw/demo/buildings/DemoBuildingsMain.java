@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 
 public class DemoBuildingsMain {
 	
-	private static Logger log = LogManager.getLogger(DemoBuildingsMain.class);
 	public static void main(String[] args) {
 
 		ControllerDirectory cd = new ControllerDirectoryDefaultImpl();
