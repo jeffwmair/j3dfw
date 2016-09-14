@@ -9,7 +9,9 @@ Example usages:
 To use this dependency, you must first install it in your local Maven repo.  Run:
 
 ```shell
-$ mvn install
+git clone https://github.com/jeffwmair/j3dfw.git
+cd j3dfw
+mvn install
 ```
 
 ### Dependency
