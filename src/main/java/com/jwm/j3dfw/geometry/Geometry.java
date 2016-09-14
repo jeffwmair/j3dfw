@@ -1,19 +1,15 @@
 package com.jwm.j3dfw.geometry;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.jwm.j3dfw.geometry.Transition.TransitionType;
+import com.jwm.j3dfw.production.TargetCamera;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
-
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import com.jwm.j3dfw.geometry.Transition.TransitionType;
-import com.jwm.j3dfw.production.TargetCamera;
-import com.jwm.j3dfw.production.Camera;
-import com.jwm.j3dfw.util.FileLoader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Geometry {
 
@@ -24,7 +20,6 @@ public class Geometry {
 	private static Logger log = LogManager.getLogger(Geometry.class);
 
 	protected List<Geometry> children;
-	private final int ITEMS_PER_VERTEX = 3;
 	private Mesh mesh;
 	private Material material;
 	private List<Transformation> transformations;
@@ -33,16 +28,24 @@ public class Geometry {
 	private Transition rotationOverheadTransition, rotationLeftAndRightTransition, rotationEndOverEndTransition;
 	private Translation overallTranslation;
 	private Scaling overallScale;
-	protected TargetCamera cam;
-	protected List<GeometryListener> listeners;
+	private TargetCamera cam;
+	private List<GeometryListener> listeners;
 
 	public Geometry() {
+		// todo: come up with something better
+		this(null, null);
+		if (log.isDebugEnabled()) {
+			log.debug("New "+this.toString());
+		}
+	}
+
+	public Geometry(String meshFilePrefix, String materialFilePrefix) {
 		if (log.isDebugEnabled()) {
 			log.debug("new Geometry:" + this);
 		}
-		listeners = new ArrayList<GeometryListener>();
-		children = new ArrayList<Geometry>();
-		transformations = new ArrayList<Transformation>();
+		listeners = new ArrayList<>();
+		children = new ArrayList<>();
+		transformations = new ArrayList<>();
 		overallTranslation = new Translation(0, 0, 0);
 
 		rotationOverhead = Rotation.getOverheadRotation();
@@ -62,7 +65,13 @@ public class Geometry {
 		transformations.add(rotationEndOverEnd);
 		transformations.add(rotationLeftAndRight);
 		transformations.add(overallScale);
+		log.debug("Geometry new vertex");
 		offsetFromOrigin = new Vertex(0, 0, 0);
+
+		// todo: i don't like this
+		if (meshFilePrefix != null && materialFilePrefix != null) {
+			loadRootPart(meshFilePrefix, materialFilePrefix);
+		}
 	}
 	public void registerInfoListener(GeometryListener listener) {
 		if (log.isDebugEnabled()) {
@@ -79,7 +88,7 @@ public class Geometry {
 	public void setOverallTranslation(double x, double y, double z) {
 		overallTranslation.setValues(x, y, z);
 	}
-	public void increaseTranslation(double x, double y, double z) {
+	protected void increaseTranslation(double x, double y, double z) {
 		overallTranslation.updateByAmount(x, y, z);
 	}
 	public void setRotation(double angle, Rotation.RotationDirection dir) {
@@ -112,8 +121,8 @@ public class Geometry {
 	public Rotation getPostTranslateRotation() {
 		return rotationPostTranslate;
 	}
-	public void transitionRotation(double startAngle, double endAngle, Rotation.RotationDirection dir,
-			int speedOutOf10, TransitionType transType) {
+	protected void transitionRotation(double startAngle, double endAngle, Rotation.RotationDirection dir,
+									  int speedOutOf10, TransitionType transType) {
 		Transition appropriateTransition = null;
 		try {
 			appropriateTransition = getRotationTransition(dir);
@@ -123,9 +132,6 @@ public class Geometry {
 			log.error("startAngle:"+startAngle+",endAngle:"+endAngle+", dir:"+dir, e);
 		}
 		getRotation(dir).setAngle(startAngle);
-	}
-	public void setScale(double scale) {
-		overallScale.set(scale);
 	}
 	public void setScale(double x, double y, double z) {
 		overallScale.set(x, y, z);
@@ -146,34 +152,25 @@ public class Geometry {
 		cam = new TargetCamera();
 		cam.setTargetGeometry(this);
 	}
-	public Vertex getCenter() {
-		if (log.isDebugEnabled()) {
-			log.debug("getCenter");
-		}
+	public void getCenter(Vertex point) {
 
 		Mesh m = mesh;
 		if (m == null) {
-			if (log.isDebugEnabled()) {
-				log.debug("m is null, trying to get the first child's mesh");
-			}
 			if (children == null || children.size() == 0) {
 				throw new RuntimeException("Cannot get the center for this ("+this+") because it has no mesh and has no child geometry items.");
 			}
 			m = children.get(0).mesh;
 		}
-		Vertex meshCenter = m.getCenter();
-		Vertex center = overallTranslation.getTransformedVertex(meshCenter);
-		return center;
+		m.getCenter(point);
+		overallTranslation.transformVertex(point);
 	}
-	public Vertex getNearbyPointOnYPlane(double distanceFromCenter, double angleOverheadRotation) {
-		Vertex center = getCenter();
-		Vertex nearby = new Vertex(center.x, center.y, center.z);
+	public void getNearbyPointOnYPlane(Vertex point, double distanceFromCenter, double angleOverheadRotation) {
+		getCenter(point);
 		double radians = Math.toRadians(angleOverheadRotation - rotationOverhead.getAngle());
 		double x = distanceFromCenter * Math.cos(radians);
 		double z = distanceFromCenter * Math.sin(radians);
-		nearby.x += x;
-		nearby.z += z;
-		return nearby;
+		point.setX(point.getX()+x);
+		point.setZ(point.getZ()+z);
 	}
 	public Rotation addRotation(double angle, Rotation.RotationDirection dir) {
 		Rotation r = new Rotation(angle, dir);
@@ -224,6 +221,7 @@ public class Geometry {
 			return;
 		gl2.glEnableClientState(GL2.GL_NORMAL_ARRAY);
 		gl2.glEnableClientState(GL2.GL_VERTEX_ARRAY);
+		int ITEMS_PER_VERTEX = 3;
 		int vertexCount = mesh.getVertexComponentsSize() / ITEMS_PER_VERTEX;
 		gl2.glNormalPointer(GL.GL_FLOAT, 0, mesh.vertex_component_normals);
 		gl2.glVertexPointer(ITEMS_PER_VERTEX, GL.GL_FLOAT, 0, mesh.vertex_components);
@@ -239,7 +237,7 @@ public class Geometry {
 		gl2.glMaterialfv(GL.GL_FRONT, GL2.GL_DIFFUSE, material.diffuse);
 		gl2.glMaterialfv(GL.GL_FRONT, GL2.GL_SHININESS, material.shinyness);
 	}
-	public void loadRootPart(String meshFilePrefix, String materialFilePrefix) {
+	private void loadRootPart(String meshFilePrefix, String materialFilePrefix) {
 		try {
 			mesh = FileLoader.loadMesh(meshFilePrefix + ".obj");
 			material = FileLoader.loadMaterial(materialFilePrefix + ".mtl", true);
@@ -250,6 +248,7 @@ public class Geometry {
 		}
 	}
 	protected void setOffsetFromOrigin(double x, double y, double z) {
+		log.debug("getOffsetFromOrigin()");
 		offsetFromOrigin = new Vertex(x, y, z);
 	}
 

@@ -1,42 +1,37 @@
 package com.jwm.j3dfw.production;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.GLU;
-
+import com.jwm.j3dfw.geometry.Vertex;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.jwm.j3dfw.geometry.Geometry;
-import com.jwm.j3dfw.geometry.Vertex;
+import javax.media.opengl.GL2;
+import javax.media.opengl.glu.GLU;
 
 public abstract class Camera {
 	private static Logger log = LogManager.getLogger(Camera.class);
-	private final double CAM_MAX_VIEW_DISTANCE = 50000.0;
 	private double viewportWidth, viewportHeight;
-	protected Vertex camera_position, camera_target;
+	Vertex camera_position;
+	Vertex camera_target;
 
 	/* 
 	 * GLU is the glut utility library which has camera helper functions 
 	 */
-	protected double zoom_distance;
-	protected double h_angle;
-	protected double v_pct;
-	private GLU glu;
+	double zoom_distance;
+	double h_angle;
+	double v_pct;
 
 	/**
 	 * Template method for specific camear implementations to implement
 	 */
 	protected abstract void look(GLU glu);
 
-	public Camera() {
+	Camera() {
+		log.info("Created new camera");
 		camera_position = new Vertex(0, 0, 10);
 		camera_target = new Vertex(0, 0, 0);
 		zoom_distance = 25;
 		h_angle = 90;
 		v_pct = 0.75;
-	}
-	public void setGlu(GLU glu) {
-		this.glu = glu;
 	}
 
 	/**
@@ -63,6 +58,7 @@ public abstract class Camera {
 		gl.glLoadIdentity();
 		// Perspective.
 		float widthHeightRatio = (float) viewportWidth / (float) viewportHeight;
+		double CAM_MAX_VIEW_DISTANCE = 50000.0;
 		glu.gluPerspective(25, widthHeightRatio, 1, CAM_MAX_VIEW_DISTANCE);
 		look(glu);
 		// Change back to model view matrix.

@@ -1,15 +1,14 @@
 package com.jwm.j3dfw.production;
 
-import java.nio.FloatBuffer;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.GL2ES1;
 import javax.media.opengl.fixedfunc.GLLightingFunc;
+import java.nio.FloatBuffer;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-public class Lights {
+class Lights {
 	private static Logger log = LogManager.getLogger(Lights.class);
 	private static float spotlightAngle;
 	private static FloatBuffer model_ambient_buff;
@@ -76,8 +75,8 @@ public class Lights {
 
 	public static void setupLighting(GL2 gl) {
 		// Global settings.
-		if (log.isDebugEnabled()) {
-			log.debug("setupLighting [spotlight:"+useSpotlight+"]");
+		if (log.isTraceEnabled()) {
+			log.trace("setupLighting [spotlight:"+useSpotlight+"]");
 		}
 		gl.glEnable(GL2.GL_MULTISAMPLE);
 		gl.glEnable(GL2.GL_DEPTH_TEST);

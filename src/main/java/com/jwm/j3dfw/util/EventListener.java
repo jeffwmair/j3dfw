@@ -1,34 +1,23 @@
 package com.jwm.j3dfw.util;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-
-import javax.media.opengl.awt.GLCanvas;
-
-import com.jwm.j3dfw.controller.Controller;
-import com.jwm.j3dfw.controller.ControllerFactory;
+import com.jwm.j3dfw.controller.ControllerDirectory;
+import com.jwm.j3dfw.controller.ControllerService;
 import com.jwm.j3dfw.geometry.Geometry;
-import com.jwm.j3dfw.geometry.GeometryList;
 import com.jwm.j3dfw.production.Scene;
 
-public class EventListener implements MouseMotionListener, MouseWheelListener, MouseListener, KeyListener {
+import java.awt.event.*;
+import java.util.List;
+
+class EventListener implements MouseMotionListener, MouseWheelListener, MouseListener, KeyListener {
 
 	private Scene activeScene;
-	private ControllerFactory controllerFactory;
-	private GLCanvas canvas;
-	private GeometryList geometryItems;
+	private ControllerDirectory controllerDirectory;
+	private List<Geometry> geometryItems;
 	private boolean cmdKey, shiftKey;
-	double lastX, lastY;
 
-	public EventListener(Scene scene, GeometryList items, ControllerFactory controllerFactory, GLCanvas canvas) {
+	EventListener(Scene scene, List<Geometry> items, ControllerDirectory controllerDirectory) {
 		this.geometryItems = items;
-		this.controllerFactory = controllerFactory;
-		this.canvas = canvas;
+		this.controllerDirectory = controllerDirectory;
 		activeScene = scene;
 	}
 
@@ -45,7 +34,7 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 		double xPos = x - viewportWidth / 2.0;
 		double xPct = 2 * xPos / viewportWidth;
 		for (Geometry g : geometryItems) {
-			controllerFactory.getInstance(g).setMousePosition(xPos, xPct);
+			controllerDirectory.getInstance(g).setMousePosition(g, xPos, xPct);
 		}
 	}
 
@@ -53,11 +42,11 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		for (Geometry g : geometryItems) {
 			if (cmdKey) {
-				controllerFactory.getInstance(g).mouseWheelMoved(e.getWheelRotation());
+				controllerDirectory.getInstance(g).mouseWheelMoved(g, e.getWheelRotation());
 			} else if (shiftKey) {
-				controllerFactory.getInstance(g).shiftMouseWheelMoved(e.getWheelRotation());
+				controllerDirectory.getInstance(g).shiftMouseWheelMoved(g, e.getWheelRotation());
 			} else {
-				controllerFactory.getInstance(g).cmdMouseWheelMoved(e.getWheelRotation());
+				controllerDirectory.getInstance(g).cmdMouseWheelMoved(g, e.getWheelRotation());
 			}
 		}
 	}
@@ -71,14 +60,13 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 		switch (e.getKeyCode()) {
 		case 157:
 			cmdKey = true;
-			lastX = lastY = 0;
 			break;
 		case 16:
 			shiftKey = true;
 			break;
 		}
 		for (Geometry g : geometryItems) {
-			controllerFactory.getInstance(g).keyPress(e.getKeyChar());
+			controllerDirectory.getInstance(g).keyPress(g, e.getKeyChar());
 		}
 	}
 
@@ -105,13 +93,13 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 	@Override
 	public void mousePressed(MouseEvent e) {
 		for (Geometry g : geometryItems) {
-			Controller c = controllerFactory.getInstance(g);
+			ControllerService c = controllerDirectory.getInstance(g);
 			switch (e.getButton()) {
 			case 1:
-				c.leftMouseDown();
+				c.leftMouseDown(g);
 				break;
 			case 3:
-				c.rightMouseDown();
+				c.rightMouseDown(g);
 				break;
 			}
 		}
@@ -119,13 +107,13 @@ public class EventListener implements MouseMotionListener, MouseWheelListener, M
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		for (Geometry g : geometryItems) {
-			Controller c = controllerFactory.getInstance(g);
+			ControllerService c = controllerDirectory.getInstance(g);
 			switch (e.getButton()) {
 			case 1:
-				c.leftMouseUp();
+				c.leftMouseUp(g);
 				break;
 			case 3:
-				c.rightMouseUp();
+				c.rightMouseUp(g);
 				break;
 			}
 		}

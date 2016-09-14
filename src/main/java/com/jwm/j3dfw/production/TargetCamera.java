@@ -1,13 +1,10 @@
 package com.jwm.j3dfw.production;
 
-import javax.media.opengl.GL2;
-import javax.media.opengl.glu.GLU;
-
+import com.jwm.j3dfw.geometry.Geometry;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.jwm.j3dfw.geometry.Geometry;
-import com.jwm.j3dfw.geometry.Vertex;
+import javax.media.opengl.glu.GLU;
 
 public class TargetCamera extends Camera {
 	private static Logger log = LogManager.getLogger(TargetCamera.class);
@@ -25,15 +22,15 @@ public class TargetCamera extends Camera {
 		double yPlaneDistance = zoom_distance * yPlaneDistance_pct;
 		double verticalDistance = zoom_distance * (1 - yPlaneDistance_pct);
 		if (autoTrack) {
-			camera_target = targetItem.getCenter();
+			targetItem.getCenter(camera_target);
 		}
 		if (autoRotate) {
-			camera_position = targetItem.getNearbyPointOnYPlane(yPlaneDistance, h_angle);
+			targetItem.getNearbyPointOnYPlane(camera_position, yPlaneDistance, h_angle);
 		}
-		if (log.isDebugEnabled()) {
-			log.debug("camera_position:" + camera_position + ", camera_target:" + camera_target + ", verticalDistance:"+verticalDistance);
+		if (log.isTraceEnabled()) {
+			log.trace("camera_position:" + camera_position + ", camera_target:" + camera_target + ", verticalDistance:"+verticalDistance);
 		}
-		glu.gluLookAt(camera_position.x, camera_position.y + verticalDistance, camera_position.z, camera_target.x, camera_target.y, camera_target.z, 0, 1, 0);
+		glu.gluLookAt(camera_position.getX(), camera_position.getY() + verticalDistance, camera_position.getZ(), camera_target.getX(), camera_target.getY(), camera_target.getZ(), 0, 1, 0);
 	}
 	public void setTargetGeometry(Geometry target) {
 		this.targetItem = target;

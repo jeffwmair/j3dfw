@@ -1,11 +1,10 @@
 package com.jwm.j3dfw.geometry;
 
-import java.nio.FloatBuffer;
-
+import com.jogamp.common.nio.Buffers;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.jogamp.common.nio.Buffers;
+import java.nio.FloatBuffer;
 
 /**
  * Geometric verticies for the shape as well as vertex normals for lighting
@@ -13,7 +12,7 @@ import com.jogamp.common.nio.Buffers;
  * @author Jeff
  * 
  */
-public class Mesh {
+class Mesh {
 	private static Logger log = LogManager.getLogger(Mesh.class);
 	public FloatBuffer vertex_components;
 	public FloatBuffer vertex_component_normals;
@@ -21,25 +20,28 @@ public class Mesh {
 	private int vertexCompSize, vertexNormalCompSize;
 
 	public Mesh(float[] vertexComponents, float[] vertexComponentNormals) {
+		if (log.isDebugEnabled()) {
+			log.debug("new "+this.toString());
+		}
 		vertex_components_arr = vertexComponents;
 		vertex_components = Buffers.newDirectFloatBuffer(vertexComponents);
 		vertex_component_normals = Buffers.newDirectFloatBuffer(vertexComponentNormals);
 		vertexCompSize = vertexComponents.length;
 		vertexNormalCompSize = vertexComponentNormals.length;
 	}
-	public Vertex getCenter() {
-		if (log.isDebugEnabled()) {
-			log.debug("getCenter");
-		}
+	public void getCenter(Vertex point) {
 		float centerX = getCenterForComponent(0);
 		float centerY = getCenterForComponent(1);
 		float centerZ = getCenterForComponent(2);
-		return new Vertex(centerX, centerY, centerZ);
+		point.setX(centerX);
+		point.setY(centerY);
+		point.setZ(centerZ);
 	}
 	public Vertex getOffsetFromOrigin() {
 		float x = getMaximumForComponent(0);
 		float y = getMaximumForComponent(1);
 		float z = getMaximumForComponent(2);
+		log.debug("getOffsetFromOrigin()");
 		return new Vertex(x, y, z);
 	}
 	private float getMaximumForComponent(int n) {

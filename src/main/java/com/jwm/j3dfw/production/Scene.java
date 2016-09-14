@@ -1,32 +1,28 @@
 package com.jwm.j3dfw.production;
 
+import com.jwm.j3dfw.geometry.Geometry;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
-
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import com.jwm.j3dfw.geometry.Geometry;
-import com.jwm.j3dfw.geometry.GeometryList;
-import com.jwm.j3dfw.util.Shader;
+import java.util.List;
 
 public class Scene implements GLEventListener {
 	private static Logger log = LogManager.getLogger(Scene.class);
-	public Camera camera;
+	private Camera camera;
 	private GLU glu;
-	private GeometryList sceneProps;
+	private List<Geometry> sceneProps;
 	private float viewportWidth;
-	protected double mouseXPositionRelativeToCenter;
 
-	public Scene(GeometryList sceneItems, Camera camera) {
+	public Scene(List<Geometry> sceneItems, Camera camera) {
 		log.info("New scene with camera:"+camera+", and sceneItems:" + sceneItems);
 		sceneProps = sceneItems;
 		glu = new GLU();
 		this.camera = camera;
-		this.camera.setGlu(glu);
 	}
 
 	/**

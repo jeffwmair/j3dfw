@@ -1,11 +1,18 @@
 package com.jwm.j3dfw.geometry;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javax.media.opengl.GL2;
 
 public class Scaling extends Transformation {
+	private static Logger log = LogManager.getLogger(Transformation.class);
 	private double x, y, z;
 
 	public Scaling(double x, double y, double z) {
+		if (log.isDebugEnabled()) {
+			log.debug("New "+this.toString());
+		}
 		this.x = x;
 		this.y = y;
 		this.z = z;
