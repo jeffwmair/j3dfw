@@ -22,6 +22,9 @@ public class MainFrame {
 
 	private static Logger log = LogManager.getLogger(MainFrame.class);
 	private static MainFrame instance;
+	private static final int defaultFps = 60;
+	private static final int defaultFrameWidth = 800;
+	private static final int defaultFrameHeight = 800;
 
 	/**
 	 * Get a singleton instance
@@ -31,10 +34,18 @@ public class MainFrame {
      */
 	public static synchronized void startMainFrame(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory, int targetFps, int frameWidth, int frameHeight) {
 		if (instance != null) {
-			return;
+			throw new IllegalStateException("The main frame has already been instantiated!");
 		}
 
 		instance = new MainFrame(geometryFactory, controllerDirectory, targetFps, frameWidth, frameHeight);
+	}
+
+	public static synchronized void startMainFrameWithDefaults(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory) {
+		if (instance != null) {
+			throw new IllegalStateException("The main frame has already been instantiated!");
+		}
+
+		instance = new MainFrame(geometryFactory, controllerDirectory, defaultFps, defaultFrameWidth, defaultFrameHeight);
 	}
 
 	private MainFrame(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory, int targetFps, int frameWidth, int frameHeight) {

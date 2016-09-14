@@ -10,10 +10,7 @@ public class DemoBuildingsMain {
 	public static void main(String[] args) {
 		ControllerDirectory cd = new ControllerDirectoryDefaultImpl();
 		GeometryFactory geometryFactory = new DemoGeometryFactoryImpl();
-		int targetFps = 60;
-		int frameWidth = 800;
-		int frameHeight = 800;
-		MainFrame.startMainFrame(geometryFactory, cd, targetFps, frameWidth, frameHeight);
+		MainFrame.startMainFrameWithDefaults(geometryFactory, cd);
 	}
 
 }
