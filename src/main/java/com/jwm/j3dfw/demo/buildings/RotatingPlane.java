@@ -6,7 +6,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 class RotatingPlane extends Plane {
-	private static Logger log = LogManager.getLogger(RotatingPlane.class);
 	private double currentRotationAmt;
 	RotatingPlane() {
 		super();

@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  * Created by Jeff on 2016-04-02.
  */
-public class DemoGeometryFactoryImpl implements GeometryFactory {
+class DemoGeometryFactoryImpl implements GeometryFactory {
 
     TargetCamera targetCam = null;
 
