@@ -16,17 +16,3 @@ To configure your application to use this project, you need the following maven 
 	<version>1.0</version>
 </dependency>
 ```
-
-### My public repository:
-```xml
-<repositories>
-	<repository>
-		<id>j3dfw-mvn-repo</id>
-		<url>https://raw.github.com/jeffwmair/j3dfw/mvn-repo/</url>
-		<snapshots>
-			<enabled>true</enabled>
-			<updatePolicy>always</updatePolicy>
-		</snapshots>
-	</repository>
-</repositories> 
-```
