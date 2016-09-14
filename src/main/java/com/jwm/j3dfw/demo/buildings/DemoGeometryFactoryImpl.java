@@ -1,7 +1,10 @@
 package com.jwm.j3dfw.demo.buildings;
 
 import com.jwm.j3dfw.demo.RotatingPlane;
-import com.jwm.j3dfw.geometry.*;
+import com.jwm.j3dfw.geometry.Geometry;
+import com.jwm.j3dfw.geometry.GeometryFactory;
+import com.jwm.j3dfw.geometry.Rotation;
+import com.jwm.j3dfw.geometry.Vertex;
 import com.jwm.j3dfw.geometry.shapes.Cube;
 import com.jwm.j3dfw.production.Camera;
 import com.jwm.j3dfw.production.TargetCamera;

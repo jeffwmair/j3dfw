@@ -21,17 +21,9 @@ class VoxelGeometryFactory implements GeometryFactory {
     VoxelGeometryFactory() {
         RotatingPlane plane = new RotatingPlane();
 
-        /**
-         * Add some cubes
-         */
 
-        
-        double cubeOffset = 2.1;
-        for(int i = 0; i < 10; i++) {
-            Cube c = new Cube();
-            c.setOverallTranslation(i * cubeOffset, 0, 0);
-            geometryList.add(c);
-        }
+        Cube c = new Cube();
+        geometryList.add(c);
 
 
         plane.initCamera();

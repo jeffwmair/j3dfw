@@ -49,7 +49,7 @@ public class MainFrame {
 	}
 
 	private MainFrame(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory, int targetFps, int frameWidth, int frameHeight) {
-		log.info("New MainFrame");
+		log.info("New MainFrame.  Fps:"+targetFps+", Width:"+frameWidth+", Height:"+frameHeight);
 		GLProfile glp = GLProfile.getDefault();
 		GLCapabilities caps = new GLCapabilities(glp);
 		caps.setSampleBuffers(true);

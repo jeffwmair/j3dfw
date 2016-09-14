@@ -9,6 +9,11 @@ public class ControllerService {
 
 	private static Logger log = LogManager.getLogger(ControllerService.class);
 
+	protected final int KEY_LEFT_ARROW = 37;
+	protected final int KEY_UP_ARROW = 38;
+	protected final int KEY_RIGHT_ARROW = 39;
+	protected final int KEY_DOWN_ARROW = 40;
+
 	public void leftMouseDown(Geometry geo) {
 
 	}
@@ -22,10 +27,6 @@ public class ControllerService {
 
 	}
 	public void keyPress(Geometry geo, int keyCode) {
-
-		if (log.isDebugEnabled()) {
-			log.debug("keyPress:" + keyCode);
-		}
 
 		// 67 = c
 		if (keyCode == 67) {

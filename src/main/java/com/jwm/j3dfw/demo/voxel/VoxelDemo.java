@@ -1,7 +1,6 @@
 package com.jwm.j3dfw.demo.voxel;
 
 import com.jwm.j3dfw.controller.ControllerDirectory;
-import com.jwm.j3dfw.demo.ControllerDirectoryDefaultImpl;
 import com.jwm.j3dfw.geometry.GeometryFactory;
 import com.jwm.j3dfw.util.MainFrame;
 
@@ -11,7 +10,7 @@ import com.jwm.j3dfw.util.MainFrame;
 public class VoxelDemo {
 
     public static void main (String args[]) {
-        ControllerDirectory cd = new ControllerDirectoryDefaultImpl();
+        ControllerDirectory cd = new VoxelControllerDirectoryImpl();
         GeometryFactory geometryFactory = new VoxelGeometryFactory();
         MainFrame.startMainFrameWithDefaults(geometryFactory, cd);
     }

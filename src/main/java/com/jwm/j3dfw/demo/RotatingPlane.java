@@ -2,8 +2,6 @@ package com.jwm.j3dfw.demo;
 
 import com.jwm.j3dfw.geometry.Rotation.RotationDirection;
 import com.jwm.j3dfw.geometry.shapes.Plane;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 public class RotatingPlane extends Plane {
 	private double currentRotationAmt;
