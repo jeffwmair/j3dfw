@@ -1,13 +1,13 @@
-package com.jwm.j3dfw.demo.buildings;
+package com.jwm.j3dfw.demo;
 
 import com.jwm.j3dfw.geometry.Rotation.RotationDirection;
 import com.jwm.j3dfw.geometry.shapes.Plane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-class RotatingPlane extends Plane {
+public class RotatingPlane extends Plane {
 	private double currentRotationAmt;
-	RotatingPlane() {
+	public RotatingPlane() {
 		super();
 
 		/* TODO: sort out this magic number.  It is

@@ -35,9 +35,6 @@ public class TargetCamera extends Camera {
 	public void setTargetGeometry(Geometry target) {
 		this.targetItem = target;
 	}
-	public Geometry getTargetGeometry() {
-		return this.targetItem;
-	}
 	public void toggleAutoRotate() {
 		if (!autoTrack) {
 			autoRotate = false;

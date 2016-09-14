@@ -1,5 +1,6 @@
 package com.jwm.j3dfw.demo.buildings;
 
+import com.jwm.j3dfw.demo.RotatingPlane;
 import com.jwm.j3dfw.geometry.*;
 import com.jwm.j3dfw.geometry.shapes.Cube;
 import com.jwm.j3dfw.production.Camera;

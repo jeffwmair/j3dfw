@@ -1,6 +1,7 @@
 package com.jwm.j3dfw.production;
 
 import com.jwm.j3dfw.geometry.Geometry;
+import com.jwm.j3dfw.util.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -19,6 +20,8 @@ public class Scene implements GLEventListener {
 	private float viewportWidth;
 
 	public Scene(List<Geometry> sceneItems, Camera camera) {
+		AssertUtils.notNull(sceneItems, "must provide sceneItems");
+		AssertUtils.notNull(camera, "must provide a camera object");
 		log.info("New scene with camera:"+camera+", and sceneItems:" + sceneItems);
 		sceneProps = sceneItems;
 		glu = new GLU();
