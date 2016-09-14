@@ -5,10 +5,13 @@ Example usages:
 * [Drive](https://github.com/jeffwmair/Drive)
 * More to come!
 
-## Maven Instructions
-To configure your application to use this project, you need the following maven (pom.xml) configuration:
+## Maven Dependency
+To use this dependency, you must first install it in your local Maven repo.  Run:
 
-### The j3dfw artifact:
+```shell
+$ mvn install
+```
+
 ```xml
 <dependency>
 	<groupId>com.jwm.j3dfw</groupId>
