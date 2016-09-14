@@ -12,6 +12,8 @@ To use this dependency, you must first install it in your local Maven repo.  Run
 $ mvn install
 ```
 
+### Dependency
+
 ```xml
 <dependency>
 	<groupId>com.jwm.j3dfw</groupId>
