@@ -22,7 +22,7 @@ class VoxelGeometryFactory implements GeometryFactory {
         RotatingPlane plane = new RotatingPlane();
 
 
-        Cube c = new Cube();
+        Cube c = new VoxelPerson();
         geometryList.add(c);
 
 

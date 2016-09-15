@@ -12,10 +12,16 @@ import org.apache.log4j.Logger;
 public class VoxelObjectController extends ControllerService {
 
     static Logger log = LogManager.getLogger(ControllerService.class);
-    enum Movement { Left, Right, Up, Down, Stopped, NA }
+    enum Movement { Left, Right, Away, Toward, Stopped, NA }
     Movement movementState = Movement.Stopped;
 
     public void keyPress(Geometry geo, int keyCode) {
+
+        // we just want to move the Person
+        if (!(geo instanceof VoxelPerson)) {
+            return;
+        }
+
         super.keyPress(geo, keyCode);
         Movement desiredMovement = getMovementDirectionFromKeyCode(keyCode);
 
@@ -23,23 +29,17 @@ public class VoxelObjectController extends ControllerService {
             return;
         }
 
-        if (movementState == desiredMovement) {
-            log.debug("Stopping");
-            movementState = Movement.Stopped;
-        } else {
-            if (log.isDebugEnabled()) {
-                log.debug("Changing movement to:" + desiredMovement);
-            }
-            movementState = desiredMovement;
-        }
+        ((VoxelPerson) geo).setMovementState(desiredMovement);
+
+
     }
 
     private Movement getMovementDirectionFromKeyCode(int keycode) {
         switch (keycode) {
             case KEY_DOWN_ARROW:
-                return Movement.Down;
+                return Movement.Toward;
             case KEY_UP_ARROW:
-                return Movement.Up;
+                return Movement.Away;
             case KEY_LEFT_ARROW:
                 return Movement.Left;
             case KEY_RIGHT_ARROW:
