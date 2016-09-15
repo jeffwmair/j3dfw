@@ -91,6 +91,23 @@ public class Geometry {
 	protected void increaseTranslation(double x, double y, double z) {
 		overallTranslation.updateByAmount(x, y, z);
 	}
+
+	/**
+	 * Increase x-position translation
+	 * @param amt
+     */
+	protected void increaseXTranslation(double amt) {
+		increaseTranslation(amt, 0, 0);
+	}
+
+	protected void increaseYTranslation(double amt) {
+		increaseTranslation(0, amt, 0);
+	}
+
+	protected void increaseZTranslation(double amt) {
+		increaseTranslation(0, 0, amt);
+	}
+
 	public void setRotation(double angle, Rotation.RotationDirection dir) {
 		getRotation(dir).setAngle(angle);
 	}

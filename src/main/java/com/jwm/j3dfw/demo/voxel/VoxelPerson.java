@@ -11,8 +11,9 @@ import static com.jwm.j3dfw.demo.voxel.VoxelObjectController.Movement.Stopped;
  */
 public class VoxelPerson extends Cube {
 
-    static Logger log = LogManager.getLogger(VoxelPerson.class);
+    private static final Logger LOG = LogManager.getLogger(VoxelPerson.class);
     private VoxelObjectController.Movement movementState = Stopped;
+    private final double MOVEMENT_SPEED = 0.1;
 
     /**
      * Update the state of movement
@@ -20,11 +21,11 @@ public class VoxelPerson extends Cube {
      */
     public void setMovementState(VoxelObjectController.Movement movementState) {
         if (this.movementState == movementState) {
-            log.debug("Stopping");
+            LOG.debug("Stopping");
             this.movementState = Stopped;
         } else {
-            if (log.isDebugEnabled()) {
-                log.debug("Changing movement to:" + movementState);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Changing movement to:" + movementState);
             }
             this.movementState = movementState;
         }
@@ -41,20 +42,20 @@ public class VoxelPerson extends Cube {
 
         switch (movementState) {
             case Left:
-                log.debug("moving left");
-                increaseTranslation(-0.1, 0, 0);
+                LOG.debug("moving left");
+                increaseXTranslation(-MOVEMENT_SPEED);
                 break;
             case Right:
-                log.debug("moving right");
-                increaseTranslation(0.1, 0, 0);
+                LOG.debug("moving right");
+                increaseXTranslation(MOVEMENT_SPEED);
                 break;
             case Away:
-                log.debug("moving away");
-                increaseTranslation(0, 0, -0.1);
+                LOG.debug("moving away");
+                increaseZTranslation(-MOVEMENT_SPEED);
                 break;
             case Toward:
-                log.debug("moving toward");
-                increaseTranslation(0, 0, 0.1);
+                LOG.debug("moving toward");
+                increaseZTranslation(MOVEMENT_SPEED);
                 break;
             case Stopped:
                 // no change
