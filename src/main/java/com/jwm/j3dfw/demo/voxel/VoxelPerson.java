@@ -1,8 +1,15 @@
 package com.jwm.j3dfw.demo.voxel;
 
 import com.jwm.j3dfw.geometry.shapes.Cube;
+import com.sun.prism.paint.Stop;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import static com.jwm.j3dfw.demo.voxel.VoxelObjectController.Movement.Stopped;
 
@@ -14,6 +21,12 @@ public class VoxelPerson extends Cube {
     private static final Logger LOG = LogManager.getLogger(VoxelPerson.class);
     private VoxelObjectController.Movement movementState = Stopped;
     private final double MOVEMENT_SPEED = 0.1;
+    private final List<Double> upDownMovements = new ArrayList<>(Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.2, 0.1, 0.0, -0.1, -0.2, -0.3, -0.2, -0.1));
+    private Queue<Double> upDownMovementQueue = new ArrayBlockingQueue<Double>(12);
+
+    public VoxelPerson() {
+        for(Double val : upDownMovements) upDownMovementQueue.add(val);
+    }
 
     /**
      * Update the state of movement
@@ -35,7 +48,17 @@ public class VoxelPerson extends Cube {
     public void applyLogic() {
 
         movePerson();
+        bobUpAndDown();
 
+    }
+
+    private void bobUpAndDown() {
+        // while walking, need to bob up and down slightly
+        if (movementState != Stopped) {
+            Double val = upDownMovementQueue.remove();
+            increaseYTranslation(val);
+            upDownMovementQueue.add(val);
+        }
     }
 
     private void movePerson() {
