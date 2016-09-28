@@ -1,7 +1,6 @@
 package com.jwm.j3dfw.demo.voxel;
 
 import com.jwm.j3dfw.geometry.shapes.Cube;
-import com.sun.prism.paint.Stop;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
