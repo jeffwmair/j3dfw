@@ -14,17 +14,12 @@ import java.nio.FloatBuffer;
  */
 class Material {
 
-	private static Logger log = LoggerFactory.getLogger(Material.class);
-	// todo: replace with getters
 	public FloatBuffer ambient;
 	public FloatBuffer diffuse;
 	public FloatBuffer specular;
 	public FloatBuffer shinyness;
 
 	public Material(float[] amb, float[] diff, float[] spec, float[] shiny) {
-		if (log.isDebugEnabled()) {
-			log.debug("New "+this.toString());
-		}
 		ambient = Buffers.newDirectFloatBuffer(amb);
 		diffuse = Buffers.newDirectFloatBuffer(diff);
 		specular = Buffers.newDirectFloatBuffer(spec);
