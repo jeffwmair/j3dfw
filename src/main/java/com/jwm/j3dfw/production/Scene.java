@@ -2,8 +2,8 @@ package com.jwm.j3dfw.production;
 
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.util.AssertUtils;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
@@ -13,7 +13,7 @@ import javax.media.opengl.glu.GLU;
 import java.util.List;
 
 public class Scene implements GLEventListener {
-	private static Logger log = LogManager.getLogger(Scene.class);
+	private static Logger log = LoggerFactory.getLogger(Scene.class);
 	private Camera camera;
 	private GLU glu;
 	private List<Geometry> sceneProps;

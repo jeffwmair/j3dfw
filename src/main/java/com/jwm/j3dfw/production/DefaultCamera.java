@@ -1,12 +1,12 @@
 package com.jwm.j3dfw.production;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.media.opengl.glu.GLU;
 
 public class DefaultCamera extends Camera {
-	private static Logger log = LogManager.getLogger(DefaultCamera.class);
+	private static Logger log = LoggerFactory.getLogger(DefaultCamera.class);
 
 	public DefaultCamera() {
 		super();

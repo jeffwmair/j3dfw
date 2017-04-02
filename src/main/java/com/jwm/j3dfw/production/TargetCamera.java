@@ -1,13 +1,13 @@
 package com.jwm.j3dfw.production;
 
 import com.jwm.j3dfw.geometry.Geometry;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.media.opengl.glu.GLU;
 
 public class TargetCamera extends Camera {
-	private static Logger log = LogManager.getLogger(TargetCamera.class);
+	private static Logger log = LoggerFactory.getLogger(TargetCamera.class);
 	private boolean autoRotate;
 	private boolean autoTrack;
 	private Geometry targetItem;

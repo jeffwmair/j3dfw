@@ -1,8 +1,8 @@
 package com.jwm.j3dfw.geometry;
 
 import com.jogamp.common.nio.Buffers;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.nio.FloatBuffer;
 
@@ -14,7 +14,7 @@ import java.nio.FloatBuffer;
  */
 class Material {
 
-	private static Logger log = LogManager.getLogger(Material.class);
+	private static Logger log = LoggerFactory.getLogger(Material.class);
 	// todo: replace with getters
 	public FloatBuffer ambient;
 	public FloatBuffer diffuse;

@@ -1,11 +1,11 @@
 package com.jwm.j3dfw.geometry.shapes;
 
 import com.jwm.j3dfw.geometry.Geometry;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class Plane extends Geometry {
-	private static Logger log = LogManager.getLogger(Plane.class);
+	private static Logger log = LoggerFactory.getLogger(Plane.class);
 	private Plane(String material) {
 		super("surface_10m_10m", material);
 	}

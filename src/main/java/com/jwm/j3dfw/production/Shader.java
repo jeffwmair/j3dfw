@@ -1,7 +1,7 @@
 package com.jwm.j3dfw.production;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.media.opengl.GL2;
 import java.io.BufferedReader;
@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 class Shader {
 
-	private static Logger log = LogManager.getLogger(Shader.class);
+	private static Logger log = LoggerFactory.getLogger(Shader.class);
 
 	/**
 	 * Setup vertex and fragment shaders
@@ -50,9 +50,7 @@ class Shader {
 	}
 
 	private static String readFromFile(InputStream inStream) {
-		if (log.isDebugEnabled()) {
 			log.debug("readFromFile...");
-		}
 		StringBuilder sb = new StringBuilder();
 		BufferedReader br = null;
 		try {

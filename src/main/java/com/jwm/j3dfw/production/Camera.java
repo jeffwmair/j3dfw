@@ -1,14 +1,14 @@
 package com.jwm.j3dfw.production;
 
 import com.jwm.j3dfw.geometry.Vertex;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.glu.GLU;
 
 public abstract class Camera {
-	private static Logger log = LogManager.getLogger(Camera.class);
+	private static Logger log = LoggerFactory.getLogger(Camera.class);
 	private double viewportWidth, viewportHeight;
 	Vertex camera_position;
 	Vertex camera_target;
@@ -67,9 +67,7 @@ public abstract class Camera {
 	}
 
 	public void setTarget(Vertex target) {
-		if (log.isDebugEnabled()) {
-			log.debug("setTarget:"+target);
-		}
+			log.debug("setTarget {}",target);
 		camera_target = target;
 	}
 	public Vertex getTarget() {
@@ -85,9 +83,7 @@ public abstract class Camera {
 		this.v_pct += pct;
 	}
 	public void setZoom(int wheelRotation) {
-		if (log.isDebugEnabled()) {
-			log.debug("setZoom:"+wheelRotation);
-		}
+			log.debug("setZoom:{}",wheelRotation);
 		zoom_distance += wheelRotation;
 	}
 }

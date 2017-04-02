@@ -2,8 +2,8 @@ package com.jwm.j3dfw.demo.voxel;
 
 import com.jwm.j3dfw.controller.ControllerService;
 import com.jwm.j3dfw.geometry.Geometry;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 /**
  * For taking input events and using them to control the voxel demo scene.
@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
  */
 public class VoxelObjectController extends ControllerService {
 
-    static Logger log = LogManager.getLogger(ControllerService.class);
+    static Logger log = LoggerFactory.getLogger(ControllerService.class);
     enum Movement { Left, Right, Away, Toward, Stopped, NA }
     Movement movementState = Movement.Stopped;
 

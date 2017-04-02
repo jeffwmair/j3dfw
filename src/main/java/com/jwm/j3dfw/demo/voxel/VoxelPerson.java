@@ -1,9 +1,8 @@
 package com.jwm.j3dfw.demo.voxel;
 
 import com.jwm.j3dfw.geometry.shapes.Cube;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,14 +16,16 @@ import static com.jwm.j3dfw.demo.voxel.VoxelObjectController.Movement.Stopped;
  */
 public class VoxelPerson extends Cube {
 
-    private static final Logger LOG = LogManager.getLogger(VoxelPerson.class);
+    private static Logger Log = LoggerFactory.getLogger(VoxelPerson.class);
     private VoxelObjectController.Movement movementState = Stopped;
     private final double MOVEMENT_SPEED = 0.1;
-    private final List<Double> upDownMovements = new ArrayList<>(Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.2, 0.1, 0.0, -0.1, -0.2, -0.3, -0.2, -0.1));
+    private final List<Double> upDownMovements = new ArrayList<>(
+            Arrays.asList(0.0, 0.1, 0.2, 0.3, 0.2, 0.1, 0.0, -0.1, -0.2, -0.3, -0.2, -0.1));
     private Queue<Double> upDownMovementQueue = new ArrayBlockingQueue<Double>(12);
 
     public VoxelPerson() {
-        for(Double val : upDownMovements) upDownMovementQueue.add(val);
+        for (Double val : upDownMovements)
+            upDownMovementQueue.add(val);
     }
 
     /**
@@ -33,22 +34,18 @@ public class VoxelPerson extends Cube {
      */
     public void setMovementState(VoxelObjectController.Movement movementState) {
         if (this.movementState == movementState) {
-            LOG.debug("Stopping");
+            Log.debug("Stopping");
             this.movementState = Stopped;
         } else {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Changing movement to:" + movementState);
-            }
+            Log.debug("Changing movement to:{}", movementState);
             this.movementState = movementState;
         }
     }
 
     @Override
     public void applyLogic() {
-
         movePerson();
         bobUpAndDown();
-
     }
 
     private void bobUpAndDown() {
@@ -63,27 +60,27 @@ public class VoxelPerson extends Cube {
     private void movePerson() {
 
         switch (movementState) {
-            case Left:
-                LOG.debug("moving left");
-                increaseXTranslation(-MOVEMENT_SPEED);
-                break;
-            case Right:
-                LOG.debug("moving right");
-                increaseXTranslation(MOVEMENT_SPEED);
-                break;
-            case Away:
-                LOG.debug("moving away");
-                increaseZTranslation(-MOVEMENT_SPEED);
-                break;
-            case Toward:
-                LOG.debug("moving toward");
-                increaseZTranslation(MOVEMENT_SPEED);
-                break;
-            case Stopped:
-                // no change
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown movementState:"+movementState);
+        case Left:
+            Log.debug("moving left");
+            increaseXTranslation(-MOVEMENT_SPEED);
+            break;
+        case Right:
+            Log.debug("moving right");
+            increaseXTranslation(MOVEMENT_SPEED);
+            break;
+        case Away:
+            Log.debug("moving away");
+            increaseZTranslation(-MOVEMENT_SPEED);
+            break;
+        case Toward:
+            Log.debug("moving toward");
+            increaseZTranslation(MOVEMENT_SPEED);
+            break;
+        case Stopped:
+            // no change
+            break;
+        default:
+            throw new IllegalArgumentException("Unknown movementState:" + movementState);
         }
 
     }

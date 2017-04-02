@@ -6,8 +6,8 @@ import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.geometry.GeometryFactory;
 import com.jwm.j3dfw.production.Camera;
 import com.jwm.j3dfw.production.Scene;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLProfile;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class MainFrame {
 
-	private static Logger log = LogManager.getLogger(MainFrame.class);
+	private static Logger log = LoggerFactory.getLogger(MainFrame.class);
 	private static MainFrame instance;
 	private static final int defaultFps = 60;
 	private static final int defaultFrameWidth = 800;

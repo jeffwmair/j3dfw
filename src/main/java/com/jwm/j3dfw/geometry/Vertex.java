@@ -1,16 +1,14 @@
 package com.jwm.j3dfw.geometry;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class Vertex {
-	private static Logger log = LogManager.getLogger(Vertex.class);
+	private static Logger log = LoggerFactory.getLogger(Vertex.class);
 	double x, y, z;
 
 	public Vertex(double x, double y, double z) {
-		if (log.isDebugEnabled()) {
-			log.debug("New Vertex: x "+x+" y "+y+" z "+z);
-		}
+			log.debug("New Vertex: x {} y {} z {}", x, y, z);
 		this.x = x;
 		this.y = y;
 		this.z = z;

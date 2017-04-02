@@ -4,15 +4,15 @@ import com.jwm.j3dfw.controller.ControllerDirectory;
 import com.jwm.j3dfw.controller.ControllerService;
 import com.jwm.j3dfw.geometry.Geometry;
 import com.jwm.j3dfw.production.Scene;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.awt.event.*;
 import java.util.List;
 
 class EventListener implements MouseMotionListener, MouseWheelListener, MouseListener, KeyListener {
 
-	private static Logger log = LogManager.getLogger(EventListener.class);
+	private static Logger log = LoggerFactory.getLogger(EventListener.class);
 	private Scene activeScene;
 	private ControllerDirectory controllerDirectory;
 	private List<Geometry> geometryItems;
@@ -61,9 +61,7 @@ class EventListener implements MouseMotionListener, MouseWheelListener, MouseLis
 	@Override
 	public void keyPressed(KeyEvent e) {
 
-		if (log.isDebugEnabled()) {
-			log.debug("keypress keyCode:"+e.getKeyCode());
-		}
+			log.debug("keypress keyCode:{}",e.getKeyCode());
 		switch (e.getKeyCode()) {
 		case 157:
 			cmdKey = true;

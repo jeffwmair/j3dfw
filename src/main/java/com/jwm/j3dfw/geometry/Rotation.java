@@ -1,12 +1,12 @@
 package com.jwm.j3dfw.geometry;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.media.opengl.GL2;
 
 public class Rotation extends Transformation {
-	private static Logger log = LogManager.getLogger(Rotation.class);
+	private static Logger log = LoggerFactory.getLogger(Rotation.class);
 	private double angle, x, y, z;
 
 	private static Vertex vertexStraightUp;
@@ -71,17 +71,13 @@ public class Rotation extends Transformation {
 	}
 
 	public Rotation(double angle, RotationDirection dir) {
-		if (log.isDebugEnabled()) {
-			log.debug("new " + this.toString());
-		}
+			log.debug("new {}", this.toString());
 		Vertex v = getVertexForRotationDir(dir);
 		setValues(angle, v.x, v.y, v.z);
 		this.transType = TransformationType.rotate;
 	}
 	private Rotation(double angle, double vecX, double vecY, double vecZ) {
-		if (log.isDebugEnabled()) {
-			log.debug("new " + this.toString());
-		}
+			log.debug("new {}", this.toString());
 		setValues(angle, vecX, vecY, vecZ);
 		this.transType = TransformationType.rotate;
 	}

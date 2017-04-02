@@ -1,8 +1,8 @@
 package com.jwm.j3dfw.geometry;
 
 import com.jogamp.common.nio.Buffers;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.FloatBuffer;
 
@@ -13,16 +13,14 @@ import java.nio.FloatBuffer;
  * 
  */
 class Mesh {
-	private static Logger log = LogManager.getLogger(Mesh.class);
+	private static Logger log = LoggerFactory.getLogger(Mesh.class);
 	public FloatBuffer vertex_components;
 	public FloatBuffer vertex_component_normals;
 	private float[] vertex_components_arr;
 	private int vertexCompSize, vertexNormalCompSize;
 
 	public Mesh(float[] vertexComponents, float[] vertexComponentNormals) {
-		if (log.isDebugEnabled()) {
-			log.debug("new "+this.toString());
-		}
+			log.debug("new {}", this.toString());
 		vertex_components_arr = vertexComponents;
 		vertex_components = Buffers.newDirectFloatBuffer(vertexComponents);
 		vertex_component_normals = Buffers.newDirectFloatBuffer(vertexComponentNormals);

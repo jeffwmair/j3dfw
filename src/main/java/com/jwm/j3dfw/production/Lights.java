@@ -1,7 +1,7 @@
 package com.jwm.j3dfw.production;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.GL2ES1;
@@ -9,7 +9,7 @@ import javax.media.opengl.fixedfunc.GLLightingFunc;
 import java.nio.FloatBuffer;
 
 class Lights {
-	private static Logger log = LogManager.getLogger(Lights.class);
+	private static Logger log = LoggerFactory.getLogger(Lights.class);
 	private static float spotlightAngle;
 	private static FloatBuffer model_ambient_buff;
 	private static FloatBuffer light_diffuse0_buff;
