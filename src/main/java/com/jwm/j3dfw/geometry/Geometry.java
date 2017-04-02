@@ -1,6 +1,7 @@
 package com.jwm.j3dfw.geometry;
 
 import com.jwm.j3dfw.geometry.Transition.TransitionType;
+import com.jwm.j3dfw.production.NoTargetCamera;
 import com.jwm.j3dfw.production.TargetCamera;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class Geometry {
     private Transition rotationOverheadTransition, rotationLeftAndRightTransition, rotationEndOverEndTransition;
     private Translation overallTranslation;
     private Scaling overallScale;
-    private TargetCamera cam;
+    private TargetCamera cam = new NoTargetCamera();
     private List<GeometryListener> listeners;
 
     public Geometry() {

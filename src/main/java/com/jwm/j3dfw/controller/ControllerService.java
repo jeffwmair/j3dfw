@@ -41,38 +41,15 @@ public class ControllerService {
 
     }
 
-    public void mouseWheelMoved(Geometry geo, int wheelRotation) {
-
-        log.debug("mouseWheelMoved:{}", wheelRotation);
-
-        Camera cam = geo.getCamera();
-        if (cam == null) {
-            log.debug("mouseWheelMoved. Camera is null on geo:{}", geo);
-            return;
-        }
-        cam.setZoom(wheelRotation);
+    public void mouseWheelMoved(Geometry geo, int wheelMoved) {
+        geo.getCamera().incrementAngle(wheelMoved);
     }
 
     public void cmdMouseWheelMoved(Geometry geo, int wheelMoved) {
-
-        log.debug("cmdMouseWheelMoved {}", wheelMoved);
-        Camera cam = geo.getCamera();
-        if (cam == null) {
-            log.debug("mouseWheelMoved. Camera is null on geo:{}", geo);
-            return;
-        }
-        double angleChange = wheelMoved;
-        cam.incrementAngle(angleChange);
+        geo.getCamera().setZoom(wheelMoved);
     }
 
     public void shiftMouseWheelMoved(Geometry geo, int wheelMoved) {
-        log.debug("shiftMouseWheelMoved:{}", wheelMoved);
-        Camera cam = geo.getCamera();
-        if (cam == null) {
-            log.debug("mouseWheelMoved. Camera is null on geo:{}", geo);
-            return;
-        }
-        double angleChange = wheelMoved;
-        cam.incrementVerticalAngle(angleChange);
+        geo.getCamera().incrementVerticalAngle(wheelMoved);
     }
 }

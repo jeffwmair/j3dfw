@@ -67,7 +67,7 @@ public abstract class Camera {
 	}
 
 	public void setTarget(Vertex target) {
-			log.debug("setTarget {}",target);
+		log.debug("setTarget {}",target);
 		camera_target = target;
 	}
 	public Vertex getTarget() {
@@ -83,7 +83,7 @@ public abstract class Camera {
 		this.v_pct += pct;
 	}
 	public void setZoom(int wheelRotation) {
-			log.debug("setZoom:{}",wheelRotation);
+		log.debug("setZoom:{}",wheelRotation);
 		zoom_distance += wheelRotation;
 	}
 }

@@ -20,58 +20,57 @@ import java.util.List;
  */
 public class MainFrame {
 
-	private static Logger log = LoggerFactory.getLogger(MainFrame.class);
-	private static MainFrame instance;
-	private static final int defaultFps = 60;
-	private static final int defaultFrameWidth = 800;
-	private static final int defaultFrameHeight = 800;
+    private static Logger log = LoggerFactory.getLogger(MainFrame.class);
+    private static MainFrame instance;
+    private static final int defaultFps = 60;
+    private static final int defaultFrameWidth = 800;
+    private static final int defaultFrameHeight = 800;
 
-	/**
-	 * Get a singleton instance
-	 * @param geometryFactory
-	 * @param controllerDirectory
+    /**
+     * Get a singleton instance
+     * @param geometryFactory
+     * @param controllerDirectory
      * @return
      */
-	public static synchronized void startMainFrame(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory, int targetFps, int frameWidth, int frameHeight) {
-		if (instance != null) {
-			throw new IllegalStateException("The main frame has already been instantiated!");
-		}
+    public static synchronized void startMainFrame(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory, int targetFps, int frameWidth, int frameHeight) {
+        if (instance != null) {
+            throw new IllegalStateException("The main frame has already been instantiated!");
+        }
 
-		instance = new MainFrame(geometryFactory, controllerDirectory, targetFps, frameWidth, frameHeight);
-	}
+        instance = new MainFrame(geometryFactory, controllerDirectory, targetFps, frameWidth, frameHeight);
+    }
 
-	public static synchronized void startMainFrameWithDefaults(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory) {
-		if (instance != null) {
-			throw new IllegalStateException("The main frame has already been instantiated!");
-		}
+    public static synchronized void startMainFrameWithDefaults(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory) {
+        if (instance != null) {
+            throw new IllegalStateException("The main frame has already been instantiated!");
+        }
+        instance = new MainFrame(geometryFactory, controllerDirectory, defaultFps, defaultFrameWidth, defaultFrameHeight);
+    }
 
-		instance = new MainFrame(geometryFactory, controllerDirectory, defaultFps, defaultFrameWidth, defaultFrameHeight);
-	}
+    private MainFrame(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory, int targetFps, int frameWidth, int frameHeight) {
+        log.info("New MainFrame.  Fps:"+targetFps+", Width:"+frameWidth+", Height:"+frameHeight);
+        GLProfile glp = GLProfile.getDefault();
+        GLCapabilities caps = new GLCapabilities(glp);
+        caps.setSampleBuffers(true);
+        GLCanvas canvas = new GLCanvas(caps);
 
-	private MainFrame(GeometryFactory geometryFactory, ControllerDirectory controllerDirectory, int targetFps, int frameWidth, int frameHeight) {
-		log.info("New MainFrame.  Fps:"+targetFps+", Width:"+frameWidth+", Height:"+frameHeight);
-		GLProfile glp = GLProfile.getDefault();
-		GLCapabilities caps = new GLCapabilities(glp);
-		caps.setSampleBuffers(true);
-		GLCanvas canvas = new GLCanvas(caps);
+        List<Geometry> parts = geometryFactory.buildGeometryItems();
+        Camera cam = geometryFactory.getMainCamera();
+        Scene scene = new Scene(parts, cam);
+        EventListener listener = new EventListener(scene, parts, controllerDirectory);
+        canvas.addMouseMotionListener(listener);
+        canvas.addMouseWheelListener(listener);
+        canvas.addMouseListener(listener);
+        canvas.addKeyListener(listener);
+        canvas.addGLEventListener(scene);
 
-		List<Geometry> parts = geometryFactory.buildGeometryItems();
-		Camera cam = geometryFactory.getMainCamera();
-		Scene scene = new Scene(parts, cam);
-		EventListener listener = new EventListener(scene, parts, controllerDirectory);
-		canvas.addMouseMotionListener(listener);
-		canvas.addMouseWheelListener(listener);
-		canvas.addMouseListener(listener);
-		canvas.addKeyListener(listener);
-		canvas.addGLEventListener(scene);
+        FPSAnimator animator = new FPSAnimator(canvas, targetFps);
+        animator.start();
 
-		FPSAnimator animator = new FPSAnimator(canvas, targetFps);
-		animator.start();
-
-		Frame frame = new Frame();
-		frame.setSize(frameWidth, frameHeight);
-		frame.add(canvas);
-		frame.setVisible(true);
-	}
+        Frame frame = new Frame();
+        frame.setSize(frameWidth, frameHeight);
+        frame.add(canvas);
+        frame.setVisible(true);
+    }
 
 }
