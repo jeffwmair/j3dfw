@@ -1,9 +1,10 @@
 package com.jwm.j3dfw.controller;
 
 import com.jwm.j3dfw.geometry.Geometry;
-import com.jwm.j3dfw.production.Camera;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static java.awt.event.KeyEvent.*;
 
 public class ControllerService {
 
@@ -12,6 +13,7 @@ public class ControllerService {
     protected final int KEY_UP_ARROW = 38;
     protected final int KEY_RIGHT_ARROW = 39;
     protected final int KEY_DOWN_ARROW = 40;
+    private static final int MOUSE_SCROLL_SPEED = 2;
 
     public void leftMouseDown(Geometry geo) {
 
@@ -41,15 +43,21 @@ public class ControllerService {
 
     }
 
-    public void mouseWheelMoved(Geometry geo, int wheelMoved) {
-        geo.getCamera().incrementAngle(wheelMoved);
-    }
-
-    public void cmdMouseWheelMoved(Geometry geo, int wheelMoved) {
-        geo.getCamera().setZoom(wheelMoved);
-    }
-
-    public void shiftMouseWheelMoved(Geometry geo, int wheelMoved) {
-        geo.getCamera().incrementVerticalAngle(wheelMoved);
+    public void mouseWheelMoved(Geometry geo, int wheelMoved, int pressedKeyCode) {
+        int movementAmount = wheelMoved * MOUSE_SCROLL_SPEED;
+        switch (pressedKeyCode) {
+            case VK_META:
+                geo.getCamera().setZoom(movementAmount);
+                break;
+            case VK_ALT:
+                geo.getCamera().setZoom(movementAmount);
+                break;
+            case VK_SHIFT:
+                geo.getCamera().incrementVerticalAngle(movementAmount);
+                break;
+            default:
+                geo.getCamera().incrementAngle(movementAmount);
+                break;
+        }
     }
 }

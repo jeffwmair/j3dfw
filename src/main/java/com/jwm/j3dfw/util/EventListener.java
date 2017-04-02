@@ -18,8 +18,7 @@ class EventListener implements MouseMotionListener, MouseWheelListener, MouseLis
     private Scene activeScene;
     private ControllerDirectory controllerDirectory;
     private List<Geometry> geometryItems;
-    private enum ModifierKeyPressedEnum { None, MacCommand, Shift, Alt };
-    private ModifierKeyPressedEnum modifierKeyPressed = ModifierKeyPressedEnum.None;
+    private int pressedKey;
 
     EventListener(Scene scene, List<Geometry> items, ControllerDirectory controllerDirectory) {
         this.geometryItems = items;
@@ -46,20 +45,8 @@ class EventListener implements MouseMotionListener, MouseWheelListener, MouseLis
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         for (Geometry g : geometryItems) {
-            switch (modifierKeyPressed) {
-                case MacCommand:
-                    controllerDirectory.getInstance(g).cmdMouseWheelMoved(g, e.getWheelRotation());
-                    break;
-                case Alt:
-                    controllerDirectory.getInstance(g).cmdMouseWheelMoved(g, e.getWheelRotation());
-                    break;
-                case Shift:
-                    controllerDirectory.getInstance(g).shiftMouseWheelMoved(g, e.getWheelRotation());
-                    break;
-                default:
-                    controllerDirectory.getInstance(g).mouseWheelMoved(g, e.getWheelRotation());
-                    break;
-            }
+            controllerDirectory.getInstance(g).mouseWheelMoved(g, e.getWheelRotation(), pressedKey);
+
         }
     }
 
@@ -69,17 +56,7 @@ class EventListener implements MouseMotionListener, MouseWheelListener, MouseLis
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case VK_META:
-                modifierKeyPressed = ModifierKeyPressedEnum.MacCommand;
-                break;
-            case VK_SHIFT:
-                modifierKeyPressed = ModifierKeyPressedEnum.Shift;
-                break;
-            case VK_ALT:
-                modifierKeyPressed = ModifierKeyPressedEnum.Alt;
-                break;
-        }
+        pressedKey = e.getKeyCode();
         for (Geometry g : geometryItems) {
             controllerDirectory.getInstance(g).keyPress(g, e.getKeyCode());
         }
@@ -87,7 +64,7 @@ class EventListener implements MouseMotionListener, MouseWheelListener, MouseLis
 
     @Override
     public void keyReleased(KeyEvent e) {
-        modifierKeyPressed = ModifierKeyPressedEnum.None;
+        pressedKey = 0;
     }
 
     @Override

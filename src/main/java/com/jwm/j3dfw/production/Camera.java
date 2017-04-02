@@ -83,7 +83,6 @@ public abstract class Camera {
 		this.v_pct += pct;
 	}
 	public void setZoom(int wheelRotation) {
-		log.debug("setZoom:{}",wheelRotation);
 		zoom_distance += wheelRotation;
 	}
 }
